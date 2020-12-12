@@ -1,0 +1,152 @@
+/*
+Theme Name: Twenty Seventeen Child Theme
+Version: 1.0
+Author: A.wei
+Author URI: https://gravatar.cn
+Template:twentyseventeen
+*/
+
+/*Common*/
+.site * {
+    text-transform: initial !important;
+}
+
+table {
+    overflow: auto;
+    display: block
+}
+
+table tr:first-child td:last-child {
+    width: 100%
+}
+
+/*Typography*/
+pre *,
+code *,
+pre,
+code {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace !important;
+}
+
+.wp-block {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 674px !important;
+}
+
+.wp-block-code textarea, pre {
+    background-color: hsl(30, 20%, 25%) !important;
+    color: #fff !important;
+    padding: 15px !important;
+    border-radius: 0 !important;
+    line-height: 1.5;
+}
+
+code {
+    background-color: rgba(136, 136, 136, .3) !important;
+    border-radius: 3px;
+    padding: 1px .5em !important;
+    display: inline !important;
+    overflow: hidden;
+}
+
+pre > code {
+    margin: 0;
+    padding: 0 !important;
+    background-color: transparent !important;
+    font-size: inherit;
+}
+
+blockquote {
+    font-size: inherit;
+    margin-bottom: 1.5em;
+    background-color: rgba(0, 0, 0, .05) !important;
+    border: 1px dashed !important;
+    border-left: 5px solid hsl(30, 20%, 40%) !important;
+    padding: 15px 15px 15px 10px !important;
+}
+
+blockquote > * {
+    margin-bottom: auto;
+}
+
+/*Header*/
+.colors-light .site-title a {
+    color: #fff;
+}
+
+.colors-light .site-description {
+    color: #aaa;
+}
+
+.colors-light .site-header,
+.colors-light .navigation-top,
+.colors-light .main-navigation ul {
+    background-color: #000;
+    border: 0;
+    letter-spacing: -16px !important;
+}
+
+.colors-light .main-navigation ul.menu > .current-menu-item:not(:first-child),
+.colors-light .main-navigation ul.menu > .current_page_item:not(:first-child) {
+    background-color: #fff;
+}
+
+.colors-light .main-navigation li:not(.current-menu-item) a,
+.colors-light .main-navigation li:first-child a,
+.colors-light .menu-toggle,
+.colors-light .dropdown-toggle {
+    color: #fff;
+    border: none;
+}
+
+/*Content*/
+.single .entry-content ul,
+.single .entry-content ol,
+.page .entry-content ul,
+.page .entry-content ol {
+    margin-left: 2em;
+}
+
+/*Comment*/
+.comment-form-author,
+.comment-form-email {
+    width: 49.95%;
+    display: inline-block;
+}
+
+.comment-form-author {
+    float: left;
+}
+
+.comment-form-email {
+    float: right;
+}
+
+.comment-body {
+    margin-left: 65px;
+}
+
+.comment-list article {
+    border-top: 1px dashed !important;
+}
+
+.comment-list .children {
+    margin-left: 1em;
+}
+
+/*Sidebar*/
+.widget .current-item {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/*Media*/
+@media screen and (min-width: 48em) {
+    /*Header*/
+    .site-branding-search {
+        width: 20em;
+        float: right;
+    }
+}
+

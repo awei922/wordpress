@@ -1,0 +1,128 @@
+/**
+ * Theme Name: Atomic Blocks Child
+ * Description: Atomic Blocks theme
+ * Author: Atomic Blocks
+ * Template: atomic-blocks
+ * Text Domain: atomic-blocks
+ */
+
+/**
+ * Typography
+ */
+
+body {
+    background-color: #ebeff4;
+}
+
+pre, code {
+    font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+}
+
+pre code {
+    background: transparent;
+}
+
+* .post {
+    display: block;
+}
+
+/**
+ *  Home
+ */
+.home .entry-content .wp-block-latest-posts {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.home.page-template-default .entry-header .entry-title {
+    text-align: left;
+}
+
+/*
+ *header
+ */
+.site-description {
+    display: block;
+}
+
+.search-drawer .search-input {
+    border: solid 1px #d4dde5;
+}
+
+.main-navigation a:hover,
+.main-navigation ul li,
+.main-navigation ul li.current-menu-item a,
+.main-navigation ul li.current-page-item a {
+    color: #fff !important;
+}
+
+/*
+ * Navigation
+ */
+.pagination {
+    padding: 4% 0 0 0;
+    text-align: center;
+}
+
+/**
+ * Footer
+ */
+
+.site-footer {
+    background: #fff;
+}
+
+/**
+ *  Content
+ */
+.home .site-content,
+.blog .site-content,
+.archive .site-content,
+.search .site-content {
+    padding-bottom: 7%;
+}
+
+.error404 .site-main,
+.archive #post-wrap,
+.search #post-wrap {
+    background: #fff;
+    padding: 5% 12% 6%;
+    border-radius: 5px;
+}
+
+.entry-byline {
+    display: inline-block;
+}
+
+.entry-content h1:first-of-type,
+.entry-content h2:first-of-type,
+.entry-content h3:first-of-type,
+.entry-content h4:first-of-type,
+.entry-content h5:first-of-type,
+.entry-content h6:first-of-type {
+    margin-top: 0;
+    display: inline;
+}
+
+/**
+ *  Social
+ */
+.social-navigation a:before {
+    font-size: 26px !important;
+}
+
+/**
+ *  Widgets
+ */
+
+.widget_meta ul li:last-of-type {
+    display: none;
+}
+
+/**
+ * Blocks
+ */
+.wp-block-latest-posts__post-date {
+    display: inline;
+    margin-left: 10px;
+}

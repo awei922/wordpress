@@ -1,0 +1,179 @@
+/*
+Theme Name: Twenty Fourteen Child Theme
+Author: the WordPress team
+Template:  twentyfourteen
+*/
+
+html, body {
+    font-size: 14px;
+}
+
+.site {
+    margin: 0 auto
+}
+
+code, kbd, tt, var, samp, pre {
+    font-size: 12px;
+    font-family: monaco, menlo, consolas, 'courier new', courier, monospace;
+}
+pre{
+    padding: 0;
+}
+
+blockquote {
+    font-size: inherit;
+    border-left: 3px solid #ccc;
+    padding-left: 10px;
+    font-style: inherit;
+}
+
+.entry-title {
+    text-transform: none;
+}
+.post-thumbnail{
+    text-align: center;
+}
+#primary-menu .genericon {
+    vertical-align: middle;
+}
+
+html .mceContentBody,
+.ie7 .secondary-navigation,
+.ie7 .widget,
+.site-content .entry-header,
+.site-content .entry-content,
+.site-content .entry-summary,
+.site-content .entry-meta,
+.page-content,
+.post-navigation,
+.image-navigation,
+.archive-header,
+.page-header,
+.contributor-info,
+.comments-area,
+.site-main .mu_register,
+.widecolumn > h2,
+.widecolumn > form {
+    max-width: 572px;
+}
+
+@media screen and (min-width: 401px) {
+    #content article[name="post-list"] {
+        margin-bottom: 10px;
+        padding-top: 10px;
+    }
+
+    #content article[name="post-list"] header {
+        padding-bottom: 0;
+    }
+
+    #content article[name="post-list"] header .entry-title {
+        min-height: 44px;
+        font-size: 18px;
+    }
+
+    #content article[name="post-list"] header .entry-meta:last-of-type {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    #content article[name="post-list"].has-post-thumbnail header .entry-meta:last-of-type {
+        top: 24px;
+    }
+}
+
+@media screen and (min-width: 1218px) {
+    .archive-header, .comments-area,
+    .image-navigation, .page-header,
+    .page-content, .post-navigation,
+    .site-content .entry-header,
+    .site-content .entry-content,
+    .site-content .entry-summary,
+    .site-content footer.entry-meta {
+        margin-right: 5px;
+    }
+}
+/*wedoc样式修正*/
+body.single.single-docs .site::before{
+    width: 0;
+}
+body.single.single-docs .content-area{
+    padding-top: 0;
+}
+
+/* 文档搜索 */
+.wedocs-search-wrap {
+    width: 100%;
+    margin: 0 auto 20px;
+}
+.wedocs-search-wrap .wedocs-search-input {
+    width: 50%;
+    float: left;
+}
+.wedocs-search-wrap .wedocs-search-widget input {
+    height: 44px;
+    /*line-height: 44px;*/
+    border-radius: 2px 0 0 2px;
+    width: 100%;
+}
+.wedocs-search-wrap .wedocs-search-in, .wedocs-search-wrap .wedocs-search-form input.search-submit {
+    width: 25% !important;
+    float: left;
+    position: static;
+    display: inherit;
+}
+.wedocs-search-wrap #search_in_doc {
+    height: 44px;
+    border-radius: 0;
+    margin-left: -1px;
+}
+
+/* 友情链接 */
+
+.page-links {
+    overflow: hidden;
+    margin: 0 0 18px;
+    padding: 0;
+}
+
+.page-links a {
+    color: #555;
+    text-decoration: none;
+    display: initial;
+    background: none;
+    border: none;
+    vertical-align: middle;
+}
+
+.page-links a:hover {
+    color: #069;
+    text-decoration: none;
+}
+
+.page-links ul {
+    margin: 0;
+    padding: 0;
+}
+
+.page-links ul li {
+    float: left;
+    width: 250px;
+    line-height: 16px;
+    margin: 0 10px 10px 0;
+    padding: 8px;
+    list-style-type: none;
+    border: 1px solid #ddd;
+}
+
+.page-links ul li:hover {
+    background: #f2f2f2;
+}
+
+.page-links ul li img {
+    width: 16px;
+    height: 16px;
+    margin: 0 5px -2px 0;
+    padding: 0;
+    border: none;
+}

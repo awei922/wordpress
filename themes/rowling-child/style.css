@@ -1,0 +1,116 @@
+/*
+Theme Name: Rowling Child Theme
+Version: 1.0
+Author: A.wei
+Author URI: https://wpfaq.cn
+Template:rowling
+*/
+/* Icons */
+.social-menu a[href*="wpa.qq.com"]::before {
+    content: "\f1d6";
+    font-family: "Font Awesome 5 Brands";
+}
+
+.social-menu a[href*="wechat"]::before {
+    content: "\f1d7";
+    font-family: "Font Awesome 5 Brands";
+}
+
+.social-menu a[href*="admin"]::before {
+    content: "\f2f6";
+}
+
+/*Common*/
+* {
+    text-transform: initial !important;
+}
+
+table {
+    overflow: auto;
+    display: block
+}
+
+table tr:first-child td:last-child {
+    width: 100%
+}
+
+/*Typography*/
+pre *,
+code *,
+pre,
+code {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace !important;
+}
+
+pre {
+    overflow: auto;
+    max-height: 400px;
+    background-color: hsl(30, 20%, 25%);
+    color: #fff !important;
+}
+
+code {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+pre > code {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    font-size: inherit;
+}
+
+blockquote {
+    background-color: rgba(0, 0, 0, .05);
+    border: 1px dashed;
+    border-left: 5px solid hsl(30, 20%, 40%);
+    padding-left: 20px;
+    position: initial;
+}
+
+blockquote::before, blockquote::after {
+    content: "";
+}
+
+/*Header*/
+.header .section-inner > * {
+    display: inline-block;
+}
+
+.blog-title, .blog-description {
+    margin-right: auto;
+}
+
+.secondary-menu > li:first-child > a {
+    padding-left: 0;
+}
+
+/*Content*/
+.section-inner {
+    width: 1080px;
+}
+
+.single-post .post-image {
+    display: none;
+}
+
+.post-content * {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.content::before {
+    left: 0;
+}
+
+@media (min-width: 850px) {
+    .content {
+        padding-left: 20px;
+    }
+}
+
+/*Comment*/
+.comment-form-url {
+    clear: both;
+}

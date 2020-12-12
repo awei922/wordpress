@@ -1,0 +1,43 @@
+/*
+Theme Name: Neve Child Theme
+Version: 1.0
+Author: A.wei
+Author URI: https://gravatar.cn
+Template:neve
+*/
+
+/*Typography*/
+pre,
+code {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace !important;
+    font-style: normal !important;
+    padding-left: .5em !important;
+    padding-right: .5em !important;
+}
+
+code {
+    background-color: rgba(136, 136, 136, .3) !important;
+    border-radius: 3px;
+    margin: 0 0.2em !important;
+}
+pre > code {
+    background-color: inherit !important;
+    padding: 0 !important;
+}
+
+blockquote {
+    margin: 0 0 1.5em 0 !important;
+    background-color: rgba(0, 0, 0, .05) !important;
+}
+
+ol.wp-block,
+ul.wp-block {
+    margin: 0 0 1.5em 3em !important;
+}
+
+/*Sidebar*/
+.widget .current-item {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #000;
+}
