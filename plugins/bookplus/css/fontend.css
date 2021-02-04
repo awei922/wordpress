@@ -1,0 +1,38 @@
+.nav-catalog ul.widget {
+    list-style: none;
+}
+
+.nav-catalog ul.widget,
+.nav-catalog li.pagenav{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nav-catalog li.pagenav > ul{
+    margin-left: 1em;
+}
+
+.nav-catalog a {
+    color: #444;
+    text-decoration: none;
+}
+
+.nav-catalog a {
+    padding: 0.5rem 1em;
+    display: block;
+}
+
+/*widget-area*/
+.widget-area .nav-catalog li.page_item_has_children > a {
+    background-color: #f9f9f9;
+}
+
+.widget-area .nav-catalog li.current_page_item > a {
+    font-weight: bold;
+}
+
+.widget-area .nav-catalog ul,
+.nav-catalog .nav-catalog li {
+    margin: 0 !important;
+    padding: 0 !important;
+}
