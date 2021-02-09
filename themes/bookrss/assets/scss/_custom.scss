@@ -29,13 +29,11 @@ pre {
     background-color: $color_2a4861;
 
     .home-link {
-        color: $color_fff;
         padding-top: 2em;
         min-height: auto;
     }
 
     .site-title {
-        color: $color_fff;
         padding: 0;
         font-size: 2em;
     }
@@ -44,6 +42,11 @@ pre {
         text-align: right;
         opacity: 0.6;
         font: inherit;
+    }
+
+    a,
+    .site-description {
+        color: $color_fff;
     }
 }
 
