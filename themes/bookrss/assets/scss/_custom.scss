@@ -20,18 +20,44 @@ pre {
 }
 
 //site
-
+.site {
+    max-width: initial;
+}
 
 //header
 .site-header {
     background-color: $color_2a4861;
+
+    .home-link {
+        color: $color_fff;
+        padding-top: 2em;
+        min-height: auto;
+    }
+
+    .site-title {
+        color: $color_fff;
+        padding: 0;
+        font-size: 2em;
+    }
+
+    .site-description {
+        text-align: right;
+        opacity: 0.6;
+        font: inherit;
+    }
 }
 
 //navbar
-
+.navbar {
+    max-width: initial;
+}
 
 //content
-
+.post-navigation {
+    .nav-links {
+        font-size: 0.75em;
+    }
+}
 
 .markdown-body {
     color: inherit;
@@ -44,10 +70,25 @@ pre {
 //footer
 .site-footer {
     background-color: $color_2a4861;
+    text-align: left;
+    border-top: 1px solid $color_e8e5ce;
+
+    a {
+        color: $color_fff;
+    }
 }
 
 // front-page
 .home,
 .page-template-page-front {
+    .entry-content {
+        h2 {
+            border-top: 1px solid $color_e8e5ce;
+        }
 
+        ul {
+            margin: 1em;
+            padding: 0;
+        }
+    }
 }
