@@ -6,28 +6,13 @@ class BookPlus_FrontEnd
 
     public static function init()
     {
-        self::catalogs_hooks();
-        self::code_hooks();
-
-        add_filter('the_content', [__CLASS__, 'post_content']);
-    }
-
-    public static function catalogs_hooks()
-    {
-        if (!BookPlus_Settings::get_option('register_post_catalogs')) {
+        if (is_admin()) {
             return false;
         }
 
-        add_shortcode('list_catalogs', [__CLASS__, 'list_catalogs']);
-        add_shortcode('nav_catalog', [__CLASS__, 'nav_catalog']);
+        self::code_hooks();
 
-        add_action('wp_enqueue_scripts', [__CLASS__, 'enqueue_scripts']);
-        add_action('pre_get_posts', [__CLASS__, 'pre_get_posts']);
-    }
-
-    public static function enqueue_scripts()
-    {
-        wp_enqueue_style('bookplus-fontend', BookPlus::$plugin_url . 'css/fontend.css', [], filemtime(BookPlus::$plugin_path . 'css/fontend.css'));
+        add_filter('the_content', [__CLASS__, 'post_content']);
     }
 
     public static function post_content($content = '')
@@ -36,12 +21,18 @@ class BookPlus_FrontEnd
 
         // archive
         if ((is_archive() || is_home()) && BookPlus_Settings::get_option('archive_display_excerpt')) {
-            return wp_trim_words($content);
+            $link = sprintf(
+                '<a href="%1$s" class="more-link">%2$s</a>',
+                esc_url(get_permalink(get_the_ID())),
+                /* translators: %s: Post title. */
+                sprintf(__('Continue reading %s'), '<span class="screen-reader-text">' . get_the_title(get_the_ID()) . '</span><span class="meta-nav">&rarr;</span>')
+            );
+            return wp_trim_words($content, 55, ' &hellip; ' . $link);
         }
 
         // single
-        if (is_single() && !empty(get_children(['post_parent' => $post->ID, 'post_type' => BookPlus::$post_type]))) {
-            $content .= self::nav_catalog(['post_id' => $post->ID]);
+        if (is_single() && BookPlus_Settings::get_option('register_document')) {
+            $content .= BookPlus_Document::nav_document();
         }
 
         //if post password
@@ -52,67 +43,6 @@ class BookPlus_FrontEnd
         // target="_blank"
         if (BookPlus_Settings::get_option('target_equal_blank')) {
             $content = str_replace('<a', '<a target="_blank" rel="nofollow"', $content);
-        }
-
-        return $content;
-    }
-
-    public static function pre_get_posts($query)
-    {
-        if (!$query->is_main_query()) {
-            return false;
-        }
-    }
-
-    public static function list_catalogs($atts = [], $content = '')
-    {
-        $list = wp_list_pages(
-            [
-                'echo' => 0,
-                'title_li' => '',
-                'post_type' => BookPlus::$post_type,
-                'meta_key' => 'post_type',
-                'meta_value' => 'catalog',
-                'sort_column' => 'menu_order',
-            ]
-        );
-
-        if (!empty($list)) {
-            $content .= '<section class="list-catalogs"><ul>' . $list . '</ul></section>';
-        }
-
-        return $content;
-    }
-
-    public static function nav_catalog($atts = [], $content = '')
-    {
-        global $post;
-
-        $title_li = '';
-        if (isset($atts['post_id']) && $atts['post_id'] > 0) {
-            $parent_id = intval($atts['post_id']);
-            $title_li = __('Post');
-        } else if ($post->post_parent) {
-            $ancestors = get_post_ancestors($post->ID);
-            $root = count($ancestors) - 1;
-            $parent_id = $ancestors[$root];
-        } else {
-            $parent_id = $post->ID;
-        }
-
-        $parent_post = get_post($parent_id);
-        $list = wp_list_pages(
-            [
-                'echo' => 0,
-                'child_of' => $parent_post->ID,
-                'title_li' => '<h3 class="widget-title">' . ($title_li ? $title_li : esc_html($parent_post->post_title)) . '</h3>',
-                'post_type' => BookPlus::$post_type,
-                'sort_column' => 'menu_order',
-            ]
-        );
-
-        if (!empty($list)) {
-            $content .= '<section class="nav-catalog"><ul class="widget">' . $list . '</ul></section> ';
         }
 
         return $content;

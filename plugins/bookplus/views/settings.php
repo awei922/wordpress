@@ -1,5 +1,5 @@
 <div class="wrap bookplus-wrap">
-    <h1 class="wp-heading-inline"><?php _e('Bookplus Settings', 'bookplus'); ?></h1>
+    <h1 class="wp-heading-inline"><?php _e('Settings'); ?></h1>
     <hr class="wp-header-end">
 
     <?php

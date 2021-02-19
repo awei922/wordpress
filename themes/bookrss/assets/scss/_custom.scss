@@ -41,15 +41,27 @@ pre {
     .site-description {
         opacity: 0.6;
         font: inherit;
+        position: relative;
 
         small {
-            float: right;
+            position: absolute;
+            right: 0;
+            bottom: 0;
         }
     }
 
     a,
     .site-description {
         color: $color_fff;
+    }
+}
+
+@include breakpoint(0,643px){
+    .site-description{
+        small{
+            clip: rect(1px, 1px, 1px, 1px);
+            position: absolute;
+        }
     }
 }
 
@@ -62,6 +74,7 @@ pre {
 .site-content {
     min-height: 70vh;
 }
+.archive-header,
 .page-header{
     background-color: inherit;
 }
@@ -77,6 +90,11 @@ pre {
     blockquote {
         font-size: inherit;
     }
+}
+
+//comment
+.comment-respond{
+    background-color: inherit;
 }
 
 //footer

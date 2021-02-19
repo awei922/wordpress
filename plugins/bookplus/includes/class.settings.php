@@ -12,13 +12,17 @@ class BookPlus_Settings
                 'id' => 'bookplus_basics',
                 'title' => __('Basic Settings', 'bookplus')
             ],
-            'code' => [
-                'id' => 'bookplus_code',
-                'title' => __('Custom code', 'bookplus')
+            'login' => [
+                'id' => 'bookplus_login',
+                'title' => __('Login Limit', 'bookplus')
             ],
             'smtp' => [
                 'id' => 'bookplus_smtp',
                 'title' => __('SMTP Settings', 'bookplus')
+            ],
+            'code' => [
+                'id' => 'bookplus_code',
+                'title' => __('Custom code', 'bookplus')
             ],
         ];
         return $sections;
@@ -36,9 +40,9 @@ class BookPlus_Settings
         $settings_fields = [
             $settings_sections['basics']['id'] => [
                 [
-                    'name' => 'register_post_catalogs',
-                    'label' => __('Register Post Catalogs', 'bookplus'),
-                    'desc' => __('Register hierarchical posts to build catalogs', 'bookplus'),
+                    'name' => 'register_document',
+                    'label' => __('Register Document', 'bookplus'),
+                    'desc' => __('Register hierarchical posts to build documents, two short codes: <code>[list_document]</code> and <code>[nav_document]</code>', 'bookplus'),
                     'type' => 'checkbox',
                 ],
                 [
@@ -68,13 +72,21 @@ class BookPlus_Settings
                 [
                     'name' => 'disable_block_editor',
                     'label' => __('Disable Block Editor', 'bookplus'),
-                    'desc' => 'Disable gutenberg editor',
+                    'desc' => __('Disable', 'bookplus'),
                     'type' => 'checkbox',
                 ],
                 [
+                    'name' => 'link_manager',
+                    'label' => __('Link Manager', 'bookplus'),
+                    'desc' => __('Allowed', 'bookplus'),
+                    'type' => 'checkbox',
+                ],
+            ],
+            $settings_sections['login']['id'] => [
+                [
                     'name' => 'limit_login_attempts',
-                    'label' => __('<h2>Limit Login Attempts</h2>', 'bookplus'),
-                    'desc' => 'Allowed',
+                    'label' => __('Limit Login Attempts', 'bookplus'),
+                    'desc' => __('Allowed', 'bookplus'),
                     'type' => 'checkbox',
                 ],
                 [
@@ -90,31 +102,12 @@ class BookPlus_Settings
                 [
                     'name' => 'login_time_diff',
                     'label' => __('Login Time Diff', 'bookplus'),
-                    'desc' => __('Time diff of retries allowed, Unit: minutes ', 'bookplus'),
+                    'desc' => __('Time diff of retries allowed, Unit: <b>minutes</b> ', 'bookplus'),
                     'min' => 0,
                     'step' => 1,
                     'default' => 10,
                     'type' => 'number',
                     'sanitize_callback' => 'floatval'
-                ],
-            ],
-            $settings_sections['code']['id'] => [
-                [
-                    'name' => 'header_code',
-                    'label' => __('Header Code', 'bookplus'),
-                    'placeholder' => __('Enter Code Snippet', 'bookplus'),
-                    'desc' => __('Add header code snippet，e.g. css', 'bookplus'),
-                    'size' => 'large',
-                    'type' => 'textarea'
-                ],
-
-                [
-                    'name' => 'footer_code',
-                    'label' => __('Footer Code', 'bookplus'),
-                    'placeholder' => __('Enter Code Snippet', 'bookplus'),
-                    'desc' => __('Add footer code snippet，e.g. js', 'bookplus'),
-                    'size' => 'large',
-                    'type' => 'textarea'
                 ],
             ],
             $settings_sections['smtp']['id'] => [
@@ -184,6 +177,25 @@ class BookPlus_Settings
                     'type' => 'html'
                 ],
             ],
+            $settings_sections['code']['id'] => [
+                [
+                    'name' => 'header_code',
+                    'label' => __('Header Code', 'bookplus'),
+                    'placeholder' => __('Enter Code Snippet', 'bookplus'),
+                    'desc' => __('Add header code snippet，e.g. css', 'bookplus'),
+                    'size' => 'large',
+                    'type' => 'textarea'
+                ],
+
+                [
+                    'name' => 'footer_code',
+                    'label' => __('Footer Code', 'bookplus'),
+                    'placeholder' => __('Enter Code Snippet', 'bookplus'),
+                    'desc' => __('Add footer code snippet，e.g. js', 'bookplus'),
+                    'size' => 'large',
+                    'type' => 'textarea'
+                ],
+            ],
         ];
 
         return $settings_fields;
@@ -192,11 +204,13 @@ class BookPlus_Settings
 
     public static function init()
     {
+        if (!is_admin()) {
+            return false;
+        }
         self::$settings_api = new BookPlus_Settings_API;
 
         add_action('admin_init', [__CLASS__, 'admin_init']);
         add_action('admin_menu', [__CLASS__, 'admin_menus']);
-        add_action('admin_enqueue_scripts', [__CLASS__, 'enqueue_scripts']);
 
         add_filter('plugin_action_links', array(__CLASS__, 'plugin_action_links'), 10, 2);
     }
@@ -230,23 +244,10 @@ class BookPlus_Settings
         include_once BookPlus::$plugin_path . '/views/settings.php';
     }
 
-    public static function enqueue_scripts($hook)
-    {
-        if ('settings_page_bookplus_settings' != $hook) {
-            return false;
-        }
-
-        //css
-        wp_enqueue_style('bookplus-admin', BookPlus::$plugin_url . 'css/admin.css', [], filemtime(BookPlus::$plugin_path . 'css/admin.css'));
-    }
-
     public static function get_option($option, $section = '', $default = false)
     {
-        if (empty($section)) {
-            $settings_sections = self::settings_sections();
-            $section = $settings_sections['basics']['id'];
-        }
-
+        $settings_sections = self::settings_sections();
+        $section = $settings_sections[$section ? $section : 'basics']['id'];
         $options = get_option($section, $default);
 
         if (isset($options[$option])) {
@@ -257,7 +258,6 @@ class BookPlus_Settings
     }
 }
 
-if (is_admin()) {
-    BookPlus_Settings::init();
-}
+BookPlus_Settings::init();
+
 

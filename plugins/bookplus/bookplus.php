@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       BookPlus
  * Plugin URI:        https://gravatar.cn/
- * Description:       A post catalog plugin for WordPress
+ * Description:       A plus plugin for WordPress
  * Version:           1.0.0
  * Author:            A.wei
  * Author URI:        https://gravatar.cn/
@@ -36,6 +36,7 @@ class BookPlus
         register_deactivation_hook(__FILE__, array(__CLASS__, 'deactivation_hook'));
         register_activation_hook(__FILE__, array(__CLASS__, 'activation_hook'));
 
+        self::enqueue_scripts();
         self::include_dependencies();
     }
 
@@ -48,23 +49,40 @@ class BookPlus
     {
     }
 
+    public static function enqueue_scripts()
+    {
+        wp_enqueue_style('bookplus-fontend', BookPlus::$plugin_url . 'css/fontend.css', [], filemtime(BookPlus::$plugin_path . 'css/fontend.css'));
+
+        if (!is_admin()) {
+            return false;
+        }
+        wp_enqueue_style('bookplus-admin', BookPlus::$plugin_url . 'css/admin.css', [], filemtime(BookPlus::$plugin_path . 'css/admin.css'));
+
+        wp_enqueue_script('vuejs', BookPlus::$plugin_url . 'js/vue.min.js', [], BookPlus::$version, true);
+        wp_enqueue_script('sweetalert', BookPlus::$plugin_url . 'js/sweetalert2.min.js', ['jquery'], BookPlus::$version, true);
+        wp_enqueue_script('bookplus-admin', BookPlus::$plugin_url . 'js/admin.js', ['jquery', 'jquery-ui-sortable', 'wp-util'], filemtime(BookPlus::$plugin_path . 'js/admin.js'), true);
+    }
+
     public static function include_dependencies()
     {
         // common
         include_once self::$plugin_path . 'includes/class.settings-api.php';
         include_once self::$plugin_path . 'includes/class.settings.php';
         include_once self::$plugin_path . 'includes/class.email.php';
+        include_once self::$plugin_path . 'includes/class.link.php';
 
         // admins
         include_once self::$plugin_path . 'includes/class.auto-updates.php';
-        include_once self::$plugin_path . 'includes/class.post-catalogs.php';
+        include_once self::$plugin_path . 'includes/class.document.php';
         include_once self::$plugin_path . 'includes/class.ajax.php';
         include_once self::$plugin_path . 'includes/class.login.php';
         include_once self::$plugin_path . 'includes/class.editor.php';
 
         // frontend
         include_once self::$plugin_path . 'includes/class.front-end.php';
-        include_once self::$plugin_path . 'functions.php';
+
+        // functions
+        include_once self::$plugin_path . 'includes/functions.php';
     }
 }
 

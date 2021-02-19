@@ -46,7 +46,7 @@ new Vue({
     data: {
         editUrl: bookPlus.edit_url,
         viewUrl: bookPlus.view_url,
-        catalogUrl: bookPlus.catalog_url,
+        documentUrl: bookPlus.document_url,
         post: bookPlus.post_data.post,
         posts: bookPlus.post_data.posts,
         postStatus: bookPlus.post_status,
@@ -56,11 +56,11 @@ new Vue({
             alert(error);
         },
 
-        addCatalog: function () {
+        addDocs: function () {
             let self = this;
 
             swal({
-                title: bookPlus.enter_catalog_title,
+                title: bookPlus.enter_document_title,
                 ...swalAddConfig
             }).then(inputVal => {
                 if (inputVal.trim()) {
@@ -80,11 +80,11 @@ new Vue({
             })
         },
 
-        deleteCatalog: function (index, posts) {
+        deleteDocs: function (index, posts) {
             let self = this;
 
             swal({
-                text: bookPlus.delete_catalog_text,
+                text: bookPlus.delete_document_text,
                 ...swalDeleteConfig
             }).then(isTrue => {
                 if (isTrue) {

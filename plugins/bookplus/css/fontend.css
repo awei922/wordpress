@@ -1,38 +1,59 @@
-.nav-catalog ul.widget {
+.nav-document {
+    margin-top: 2em;
+}
+
+.nav-document h3 {
+    border-top: 1px solid #eee;
+    padding-top: 1em;
+}
+
+.list-document ul,
+.list-document li,
+.nav-document ul,
+.nav-document li {
+    margin: 0 !important;
+    padding: 0 !important;
     list-style: none;
 }
 
-.nav-catalog ul.widget,
-.nav-catalog li.pagenav{
-    margin: 0 !important;
-    padding: 0 !important;
+.list-document ul a,
+.nav-document ul a {
+    font-size: 0.85em;
+    position: relative;
+    padding-left: 1.2em;
 }
 
-.nav-catalog li.pagenav > ul{
-    margin-left: 1em;
+.list-document ul a {
+    font-size: 1.5em;
 }
 
-.nav-catalog a {
-    color: #444;
-    text-decoration: none;
+.list-document ul a::before,
+.nav-document ul a::before {
+    position: absolute;
+    background-image: url("../img/document.svg");
+    background-size: 1em;
+    display: inline-block;
+    content: '';
+    width: 1em;
+    height: 1em;
+    left: 0;
+    bottom: 0;
 }
 
-.nav-catalog a {
-    padding: 0.5rem 1em;
-    display: block;
+.list-document ul a::before,
+.nav-document ul li.page_item_has_children > a::before {
+    background-image: url("../img/folder.svg");
 }
 
-/*widget-area*/
-.widget-area .nav-catalog li.page_item_has_children > a {
-    background-color: #f9f9f9;
+.nav-document li.page_item_has_children ul {
+    margin-left: 1em !important;
 }
 
-.widget-area .nav-catalog li.current_page_item > a {
+.breadcrumb .current,
+.nav-document li.current_page_parent > a,
+.nav-document li.current_page_item > a {
     font-weight: bold;
 }
 
-.widget-area .nav-catalog ul,
-.nav-catalog .nav-catalog li {
-    margin: 0 !important;
-    padding: 0 !important;
-}
+
+
