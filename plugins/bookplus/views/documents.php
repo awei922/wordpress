@@ -1,8 +1,8 @@
 <div class="wrap bookplus-wrap" id="bookplus-app">
 
-    <h1 class="wp-heading-inline"><?php _e( 'Bookplus Catalogs', 'bookplus' ); ?></h1>
-    <a class="page-title-action" href="#" v-on:click.prevent="addCatalog">
-        <?php _e( 'Add New', 'bookplus' ); ?>
+    <h1 class="wp-heading-inline"><?php _e('Documentation'); ?></h1>
+    <a class="page-title-action" href="#" v-on:click.prevent="addDocs">
+        <?php _e( 'New document'); ?>
     </a>
     <hr class="wp-header-end">
 
@@ -56,7 +56,7 @@
                         </template>
                         <li v-else>
                             <div class="section-title">
-                                <?php _e( 'No results found.' ,'bookplus' ); ?>
+                                <?php _e( 'No results found.'); ?>
                             </div>
                         </li>
                     </ul>
@@ -70,8 +70,8 @@
                 <table class="wp-list-table widefat fixed striped tags">
                     <thead>
                         <tr>
-                            <th><?php _e( 'Title','bookplus'  ); ?></th>
-                            <th class="column-posts"><?php _e( 'ID','bookplus'  ); ?></th>
+                            <th><?php _e('Title'); ?></th>
+                            <th class="column-posts"><?php _e('ID'); ?></th>
                         </tr>
                     </thead>
 
@@ -79,13 +79,13 @@
                         <template v-if="posts.length">
                             <tr v-for="(post, index) in posts" :data-id="post.id">
                                 <td>
-                                    <a :href="post.caps.edit ? catalogUrl + post.id : '#'">
+                                    <a :href="post.caps.edit ? documentUrl + post.id : '#'">
                                         <strong>{{ post.title }}</strong>
                                         <span v-if="post.status != postStatus" class="post-status">{{ post.status }}</span>
                                     </a>
                                     <span class="row-actions">
                                         <a target="_blank" :href="viewUrl + post.id"><span class="dashicons dashicons-external"></span></a>
-                                        <span v-if="post.caps.delete" v-on:click="deleteCatalog(index, posts)" class="dashicons dashicons-trash"></span>
+                                        <span v-if="post.caps.delete" v-on:click="deleteDocs(index, posts)" class="dashicons dashicons-trash"></span>
                                         <span class="dashicons dashicons-menu"></span>
                                     </span>
                                 </td>
@@ -93,14 +93,14 @@
                             </tr>
                         </template>
                         <tr v-else>
-                            <td><?php _e( 'No results found.' ,'bookplus' ); ?></td>
+                            <td colspan="2"><?php _e( 'No results found.'); ?></td>
                         </tr>
                     </tbody>
 
                     <tfoot>
                         <tr>
-                            <th><?php _e( 'Title' ,'bookplus' ); ?></th>
-                            <th><?php _e( 'ID' ,'bookplus' ); ?></th>
+                            <th><?php _e('Title'); ?></th>
+                            <th><?php _e('ID'); ?></th>
                         </tr>
                     </tfoot>
                 </table>

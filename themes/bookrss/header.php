@@ -40,7 +40,16 @@
                         <?php bloginfo( 'name' ); ?>
                     </a>
                 </h1>
-                <h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
+                <h2 class="site-description">
+                    <?php bloginfo( 'description' );?>
+                    <small>
+                        <?php
+                            if(function_exists('the_breadcrumb')):
+                                the_breadcrumb();
+                            endif;
+                        ?>
+                    </small>
+                </h2>
             </div>
 
 			<div id="navbar" class="navbar">

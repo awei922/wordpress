@@ -39,9 +39,12 @@ pre {
     }
 
     .site-description {
-        text-align: right;
         opacity: 0.6;
         font: inherit;
+
+        small {
+            float: right;
+        }
     }
 
     a,
@@ -56,6 +59,12 @@ pre {
 }
 
 //content
+.site-content {
+    min-height: 70vh;
+}
+.page-header{
+    background-color: inherit;
+}
 .post-navigation {
     .nav-links {
         font-size: 0.75em;
