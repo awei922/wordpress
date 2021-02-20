@@ -8,7 +8,9 @@ class BookPlus_Document
             return false;
         }
 
-        add_action('init', array(__CLASS__, 'register_post_type'));
+        add_action('init', [__CLASS__, 'register_post_type']);
+        add_action('pre_get_posts', [__CLASS__, 'query_filter']);
+
         add_shortcode('list_document', [__CLASS__, 'list_document']);
         add_shortcode('nav_document', [__CLASS__, 'nav_document']);
 
@@ -85,6 +87,28 @@ class BookPlus_Document
             'rest_base' => 'posts',
             'rest_controller_class' => 'WP_REST_Posts_Controller',
         ));
+    }
+
+    public static function query_filter($query)
+    {
+        if (!$query->is_main_query()) {
+            return false;
+        }
+
+        if (is_admin() || is_singular()) {
+            return false;
+        }
+
+        $posts = get_posts([
+            'meta_key' => 'post_type',
+            'meta_value' => 'document',
+            'numberposts' => -1
+        ]);
+
+        if (!empty($posts)) {
+            $post_ids = array_column($posts, 'ID');
+            $query->set('post__not_in', $post_ids);
+        }
     }
 
     public static function list_document($atts = [], $content = '')

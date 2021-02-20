@@ -103,8 +103,8 @@ body {
 
 // navbar
 .main-navigation {
-    border-bottom: 1px solid #ededed;
-    border-top: 1px solid #ededed;
+    border-bottom: 1px solid $color_eee;
+    border-top: 1px solid $color_eee;
     background-color: $color_fff;
 
     ul.nav-menu {
@@ -135,12 +135,20 @@ body {
 
 .markdown-body {
     color: inherit;
-    a{
+
+    a {
         border-bottom-color: transparent;
     }
+
     blockquote {
         font-size: inherit;
     }
+}
+
+// comments
+.comments-area {
+    padding-top: 1em;
+    border-top: 1px solid $color_eee;
 }
 
 // widget
