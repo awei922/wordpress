@@ -233,7 +233,7 @@ class BookPlus_Settings
     public static function plugin_action_links($links, $file)
     {
         if ($file == plugin_basename(BookPlus::$plugin_path . '/bookplus.php')) {
-            $links[] = '<a href="' . esc_url(add_query_arg(['page' => 'bookplus_settings'], admin_url('options-general.php'))) . '">' . esc_html__('Settings', 'bookplus') . '</a>';
+            $links[] = '<a href="' . esc_url(add_query_arg(['page' => 'bookplus_settings'], admin_url('options-general.php'))) . '">' . esc_html__('Settings') . '</a>';
         }
 
         return $links;

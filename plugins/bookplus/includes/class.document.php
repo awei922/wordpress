@@ -98,7 +98,6 @@ class BookPlus_Document
                 'meta_value' => 'document',
                 'sort_column' => 'menu_order',
                 'show_date' => true,
-                'link_after' => '&rarr;'
             ]
         );
 

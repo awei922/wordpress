@@ -36,7 +36,9 @@ class BookPlus
         register_deactivation_hook(__FILE__, array(__CLASS__, 'deactivation_hook'));
         register_activation_hook(__FILE__, array(__CLASS__, 'activation_hook'));
 
-        self::enqueue_scripts();
+        add_action('admin_enqueue_scripts', [__CLASS__, 'admin_enqueue_scripts']);
+        add_action('wp_enqueue_scripts', [__CLASS__, 'wp_enqueue_scripts']);
+
         self::include_dependencies();
     }
 
@@ -49,13 +51,12 @@ class BookPlus
     {
     }
 
-    public static function enqueue_scripts()
-    {
+    public static function wp_enqueue_scripts(){
         wp_enqueue_style('bookplus-fontend', BookPlus::$plugin_url . 'css/fontend.css', [], filemtime(BookPlus::$plugin_path . 'css/fontend.css'));
+    }
 
-        if (!is_admin()) {
-            return false;
-        }
+    public static function admin_enqueue_scripts()
+    {
         wp_enqueue_style('bookplus-admin', BookPlus::$plugin_url . 'css/admin.css', [], filemtime(BookPlus::$plugin_path . 'css/admin.css'));
 
         wp_enqueue_script('vuejs', BookPlus::$plugin_url . 'js/vue.min.js', [], BookPlus::$version, true);

@@ -1,17 +1,21 @@
-//variables
+// variables
 $color_fff: #fff;
-$color_f7f5e7: #f7f5e7;
-$color_e8e5ce: #e8e5ce;
+$color_444: #444;
+$color_999: #999;
+$color_eee: #eee;
 $color_2a4861: #2a4861;
 
 $max-height: 400px;
+$max-width: 960px;
 
-// common
+// reset
 body {
     font-family: "Droid Serif", Georgia, "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "WenQuanYi Micro Hei", "Microsoft Yahei", serif;
+    font-size: 15px;
 }
 
-pre, code {
+pre,
+code {
     font-family: Menlo, Monaco, Consolas, "Lucida Console", "Courier New", monospace;
 }
 
@@ -19,89 +23,149 @@ pre {
     max-height: $max-height;
 }
 
-//site
-.site {
-    max-width: initial;
+button,
+input,
+select,
+textarea {
+    border-radius: 0 !important;
+    padding: 10px;
 }
 
-//header
-.site-header {
-    background-color: $color_2a4861;
+table {
+    overflow: auto;
+    border: none;
+    display: block
+}
 
-    .home-link {
-        padding-top: 2em;
-        min-height: auto;
-    }
+table tr:first-child td:last-child {
+    width: 100%
+}
 
-    .site-title {
+a {
+    text-decoration: none;
+}
+
+// site
+body {
+    .site {
+        margin: 0;
         padding: 0;
-        font-size: 2em;
+        max-width: initial;
+        background-color: $color_2a4861;
+        min-height: 100vh;
     }
+}
 
-    .site-description {
-        opacity: 0.6;
-        font: inherit;
-        position: relative;
+.container {
+    margin: 0 auto;
+    padding: 0 1.5em;
+    max-width: $max-width;
+}
 
-        small {
-            position: absolute;
-            right: 0;
-            bottom: 0;
+// header
+.site-header {
+    padding-bottom: 0;
+
+    .group {
+        display: flex;
+        align-items: center;
+
+        .nav-group,
+        hgroup {
+            flex: 1;
+
+            h1 {
+                a {
+                    color: $color_fff;
+                }
+            }
         }
     }
 
-    a,
-    .site-description {
-        color: $color_fff;
+}
+
+@include breakpoint(0, 600px) {
+    .site-breadcrumb,
+    .site-search {
+        display: none;
     }
 }
 
-@include breakpoint(0,643px){
-    .site-description{
-        small{
-            clip: rect(1px, 1px, 1px, 1px);
-            position: absolute;
+.site-description {
+    position: relative;
+
+    small {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+// navbar
+.main-navigation {
+    border-bottom: 1px solid #ededed;
+    border-top: 1px solid #ededed;
+    background-color: $color_fff;
+
+    ul.nav-menu {
+        border: none;
+    }
+}
+
+
+// content
+.wrapper {
+    min-height: 50vh;
+    background-color: $color_fff;
+
+    a {
+        color: $color_444 !important;
+        border-bottom: 1px solid $color_eee;
+
+        &:hover {
+            border-bottom-color: transparent;
         }
     }
-}
 
-//navbar
-.navbar {
-    max-width: initial;
-}
-
-//content
-.site-content {
-    min-height: 70vh;
-}
-.archive-header,
-.page-header{
-    background-color: inherit;
-}
-.post-navigation {
-    .nav-links {
-        font-size: 0.75em;
+    .meta-nav,
+    .more-link {
+        color: $color_999 !important;
     }
 }
 
 .markdown-body {
     color: inherit;
-
+    a{
+        border-bottom-color: transparent;
+    }
     blockquote {
         font-size: inherit;
     }
 }
 
-//comment
-.comment-respond{
-    background-color: inherit;
+// widget
+.widget-area {
+    .widget-title {
+        font-size: initial;
+    }
 }
 
-//footer
-.site-footer {
-    background-color: $color_2a4861;
-    text-align: left;
-    border-top: 1px solid $color_e8e5ce;
+.searchform {
+    div {
+        display: flex;
+
+        #s {
+            flex: 1;
+        }
+    }
+}
+
+
+// footer
+footer[role="contentinfo"] {
+    color: $color_fff;
+    margin-top: 0;
+    max-width: initial;
 
     a {
         color: $color_fff;
@@ -112,13 +176,16 @@ pre {
 .home,
 .page-template-page-front {
     .entry-content {
-        h2 {
-            border-top: 1px solid $color_e8e5ce;
+        ul, li {
+            margin: 0;
+            padding: 0;
         }
 
         ul {
-            margin: 1em;
-            padding: 0;
+            margin-left: 1em;
+            list-style: square;
         }
     }
 }
+
+
