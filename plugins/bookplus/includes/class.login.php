@@ -2,7 +2,7 @@
 
 class BookPlus_Login
 {
-    private static $login_ip = 'bookplus_login';
+    private static $login_ip = 'bookplus_login_ip';
 
     private static $retries = 0;
 
@@ -10,12 +10,12 @@ class BookPlus_Login
 
     public static function init()
     {
-        if (!BookPlus_Settings::get_option('limit_login_attempts')) {
+        if (!BookPlus_Settings::get_option('limit_login_attempts', 'login')) {
             return false;
         }
 
-        self::$retries = BookPlus_Settings::get_option('login_attempts_retries');
-        self::$time_diff = self::$time_diff * BookPlus_Settings::get_option('login_time_diff');
+        self::$retries = BookPlus_Settings::get_option('login_attempts_retries', 'login');
+        self::$time_diff = self::$time_diff * BookPlus_Settings::get_option('login_time_diff', 'login');
 
         add_action('wp_login_failed', [__CLASS__, 'login_failed']);
         add_action('wp_login', [__CLASS__, 'reset_retry'], 10, 2);

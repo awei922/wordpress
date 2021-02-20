@@ -4,6 +4,10 @@ class BookPlus_Ajax
 {
     public static function init()
     {
+        if (!is_admin() && !wp_doing_ajax()) {
+            return false;
+        }
+
         add_action('wp_ajax_bookplus_add_post', [__CLASS__, 'add_post']);
         add_action('wp_ajax_bookplus_delete_post', [__CLASS__, 'delete_post']);
         add_action('wp_ajax_bookplus_get_posts', [__CLASS__, 'get_posts']);
@@ -40,7 +44,7 @@ class BookPlus_Ajax
             wp_send_json_error();
         } else {
             if (0 == $parent) {
-                add_post_meta($post_id, 'post_type', 'catalog', true);
+                add_post_meta($post_id, 'post_type', 'document', true);
             }
         }
 
@@ -74,7 +78,7 @@ class BookPlus_Ajax
     {
         self::check_ajax_referer();
 
-        $data = self::catalog_list(isset($_GET['post']) ? absint($_GET['post']) : -1);
+        $data = self::document_list(isset($_GET['post']) ? absint($_GET['post']) : -1);
 
         wp_send_json_success($data);
     }
@@ -98,11 +102,11 @@ class BookPlus_Ajax
         wp_send_json_success();
     }
 
-    public static function catalog_list($post_id = -1)
+    public static function document_list($post_id = -1)
     {
         $posts = get_posts([
             'meta_key' => 'post_type',
-            'meta_value' => 'catalog',
+            'meta_value' => 'document',
             'numberposts' => -1,
             'orderby' => 'menu_order',
             'order' => 'ASC',
@@ -207,7 +211,6 @@ class BookPlus_Ajax
     }
 }
 
-if (is_admin() && wp_doing_ajax()) {
-    BookPlus_Ajax::init();
-}
+BookPlus_Ajax::init();
+
 
