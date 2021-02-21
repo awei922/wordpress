@@ -44,7 +44,7 @@ get_header(); ?>
                     <?php the_excerpt(); ?>
                 </div><!-- .entry-content -->
                 <footer class="entry-meta">
-                    <?php edit_post_link( __( 'Edit', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?>
+                    <a class="more-link" href="<?php echo esc_url(get_permalink( get_option( 'page_for_posts' ))) ?>"><?php  _e('Read more...') ?></a>
                 </footer><!-- .entry-meta -->
             </article><!-- #post -->
 
