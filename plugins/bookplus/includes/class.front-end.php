@@ -41,7 +41,8 @@ class BookPlus_FrontEnd
         }
 
         // document
-        if (is_single() && BookPlus_Settings::get_option('register_document')) {
+        if (is_singular() && BookPlus_Settings::get_option('register_document')) {
+            $content = '<div class="markdown-body">' . $content . '</div>';
             $content .= BookPlus_Document::nav_document();
         }
 

@@ -4,13 +4,17 @@ $color_444: #444;
 $color_999: #999;
 $color_eee: #eee;
 $color_2a4861: #2a4861;
+$color_0366d6: #0366d6;
 
-$max-height: 400px;
-$max-width: 960px;
+$max_height: 400px;
+$max_width: 960px;
+
+$font_size: 16px;
 
 // reset
 body {
     font-family: "Droid Serif", Georgia, "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "WenQuanYi Micro Hei", "Microsoft Yahei", serif;
+    font-size: $font_size;
 }
 
 pre,
@@ -19,7 +23,7 @@ code {
 }
 
 pre {
-    max-height: $max-height;
+    max-height: $max_height;
 }
 
 button,
@@ -57,7 +61,7 @@ body {
 .container {
     margin: 0 auto;
     padding: 0 1.5em;
-    max-width: $max-width;
+    max-width: $max_width;
 }
 
 // header
@@ -69,8 +73,8 @@ body {
         display: flex;
         align-items: center;
 
-        .nav-group,
-        hgroup {
+        .hgroup,
+        .nav-group {
             flex: 1;
 
             h1 {
@@ -81,22 +85,18 @@ body {
         }
     }
 
+    .main-navigation {
+        a {
+            font-size: small;
+        }
+    }
+
 }
 
 @include breakpoint(0, 600px) {
     .site-breadcrumb,
     .site-search {
         display: none;
-    }
-}
-
-.site-description {
-    position: relative;
-
-    small {
-        position: absolute;
-        right: 0;
-        bottom: 0;
     }
 }
 
@@ -134,9 +134,19 @@ body {
 
 .markdown-body {
     color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+
+    li {
+        margin-left: 0;
+    }
 
     a {
-        border-bottom-color: transparent;
+        color: $color_0366d6 !important;
+
+        &:hover {
+            text-decoration: none;
+        }
     }
 
     blockquote {
@@ -152,9 +162,14 @@ body {
 
 // widget
 .widget-area {
-    .widget-title {
-        font-size: initial;
+    .widget {
+        li {
+            font-size: inherit;
+        }
     }
+}
+.widget-title{
+    font-size: initial;
 }
 
 .searchform {
@@ -173,6 +188,7 @@ footer[role="contentinfo"] {
     color: $color_fff;
     max-width: initial;
     background-color: $color_2a4861;
+    font-size: inherit;
 
     a {
         color: $color_fff;

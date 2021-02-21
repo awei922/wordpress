@@ -7,7 +7,7 @@ function bookrss_enqueue_scripts()
     wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
     wp_enqueue_script('bookrss-js', get_stylesheet_directory_uri() . '/assets/dist/bundel.js', [], false, true);
 
-    if(WP_DEBUG){
+    if (WP_DEBUG) {
         wp_enqueue_script('bookrss-test-js', '//localhost:8080/main.js');
         return false;
     }
@@ -25,19 +25,9 @@ function bookrss_dequeue_scripts()
 
 add_action('wp_enqueue_scripts', 'bookrss_dequeue_scripts', 99);
 
-function bookrss_post_content($content)
+function bookrss_excerpt_more($link)
 {
-    if (is_singular()) {
-        $content = '<div class="markdown-body">' . $content . '</div>';
-    }
-
-    return $content;
-}
-
-add_filter('the_content', 'bookrss_post_content');
-
-function bookrss_excerpt_more( $link ) {
-    if ( is_admin() ) {
+    if (is_admin()) {
         return $link;
     }
 
@@ -49,4 +39,5 @@ function bookrss_excerpt_more( $link ) {
     );
     return ' &hellip; ' . $link;
 }
-add_filter( 'excerpt_more', 'bookrss_excerpt_more' );
+
+add_filter('excerpt_more', 'bookrss_excerpt_more');
