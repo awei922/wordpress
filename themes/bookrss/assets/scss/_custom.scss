@@ -11,7 +11,6 @@ $max-width: 960px;
 // reset
 body {
     font-family: "Droid Serif", Georgia, "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "WenQuanYi Micro Hei", "Microsoft Yahei", serif;
-    font-size: 15px;
 }
 
 pre,
@@ -129,6 +128,7 @@ body {
     .meta-nav,
     .more-link {
         color: $color_999 !important;
+        font-size: small;
     }
 }
 
