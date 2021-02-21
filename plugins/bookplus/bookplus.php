@@ -25,6 +25,8 @@ class BookPlus
     public static $plugin_path = '';
     public static $plugin_url = '';
     public static $post_type = 'post';
+    public static $meta_key = 'post_type';
+    public static $meta_value = 'document';
 
     public static function plugin_init()
     {
@@ -51,7 +53,8 @@ class BookPlus
     {
     }
 
-    public static function wp_enqueue_scripts(){
+    public static function wp_enqueue_scripts()
+    {
         wp_enqueue_style('bookplus-fontend', BookPlus::$plugin_url . 'css/fontend.css', [], filemtime(BookPlus::$plugin_path . 'css/fontend.css'));
     }
 

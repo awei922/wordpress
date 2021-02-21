@@ -44,7 +44,7 @@ class BookPlus_Ajax
             wp_send_json_error();
         } else {
             if (0 == $parent) {
-                add_post_meta($post_id, 'post_type', 'document', true);
+                add_post_meta($post_id, BookPlus::$meta_key, BookPlus::$meta_value, true);
             }
         }
 
@@ -105,8 +105,8 @@ class BookPlus_Ajax
     public static function document_list($post_id = -1)
     {
         $posts = get_posts([
-            'meta_key' => 'post_type',
-            'meta_value' => 'document',
+            'meta_key' => BookPlus::$meta_key,
+            'meta_value' => BookPlus::$meta_value,
             'numberposts' => -1,
             'orderby' => 'menu_order',
             'order' => 'ASC',

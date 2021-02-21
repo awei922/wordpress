@@ -9,10 +9,12 @@ class BookPlus_Document
         }
 
         add_action('init', [__CLASS__, 'register_post_type']);
-        add_action('pre_get_posts', [__CLASS__, 'query_filter']);
+        add_action('pre_get_posts', [__CLASS__, 'pre_get_posts']);
 
         add_shortcode('list_document', [__CLASS__, 'list_document']);
         add_shortcode('nav_document', [__CLASS__, 'nav_document']);
+
+        add_filter('widget_posts_args', [__CLASS__, 'widget_posts_args']);
 
         if (!is_admin()) {
             return false;
@@ -89,26 +91,46 @@ class BookPlus_Document
         ));
     }
 
-    public static function query_filter($query)
+    public static function pre_get_posts($query)
     {
         if (!$query->is_main_query()) {
             return false;
         }
 
-        if (is_admin() || is_singular()) {
+        if (is_admin()) {
             return false;
         }
 
+        $post_ids = self::get_all_document_ids();
+        if (!empty($post_ids)) {
+            $query->set('post__not_in', $post_ids);
+        }
+    }
+
+    public static function widget_posts_args($args)
+    {
+        $post_ids = self::get_all_document_ids();
+        if (!empty($post_ids)) {
+            $args['post__not_in'] = $post_ids;
+        }
+
+        return $args;
+    }
+
+    public static function get_all_document_ids()
+    {
         $posts = get_posts([
-            'meta_key' => 'post_type',
-            'meta_value' => 'document',
+            'meta_key' => BookPlus::$meta_key,
+            'meta_value' => BookPlus::$meta_value,
             'numberposts' => -1
         ]);
 
+        $ids = [];
         if (!empty($posts)) {
-            $post_ids = array_column($posts, 'ID');
-            $query->set('post__not_in', $post_ids);
+            $ids = array_column($posts, 'ID');
         }
+
+        return $ids;
     }
 
     public static function list_document($atts = [], $content = '')
@@ -118,8 +140,8 @@ class BookPlus_Document
                 'echo' => 0,
                 'title_li' => '',
                 'post_type' => BookPlus::$post_type,
-                'meta_key' => 'post_type',
-                'meta_value' => 'document',
+                'meta_key' => BookPlus::$meta_key,
+                'meta_value' => BookPlus::$meta_value,
                 'sort_column' => 'menu_order',
                 'show_date' => true,
             ]

@@ -24,33 +24,31 @@ get_header(); ?>
         <?php endif; ?>
 
         <?php
-        global $post;
-        $recent_posts = get_posts('numberposts=20&orderby=date');
-        foreach( $recent_posts as $k=> $post ):
-            if($k==0):
-                setup_postdata($post)
-        ?>
+        global $wp_query;
+        $wp_query->query(['posts_per_page'=>1]);
+        while ( have_posts() ) :
+            the_post();
+            ?>
 
-        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-            <header class="entry-header">
-                <?php if ( ! is_page_template( 'page-templates/front-page.php' ) ) : ?>
-                    <?php the_post_thumbnail(); ?>
-                <?php endif; ?>
-                <h1 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
-            </header>
+            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                <header class="entry-header">
+                    <?php if ( ! is_page_template( 'page-templates/front-page.php' ) ) : ?>
+                        <?php the_post_thumbnail(); ?>
+                    <?php endif; ?>
+                    <h1 class="entry-title">
+                        <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+                    </h1>
+                </header>
 
-            <div class="entry-content">
-                <?php the_excerpt() ?>
-            </div><!-- .entry-content -->
-            <footer class="entry-meta">
-                <?php edit_post_link( __( 'Edit', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?>
-            </footer><!-- .entry-meta -->
-        </article><!-- #post -->
+                <div class="entry-content">
+                    <?php the_excerpt(); ?>
+                </div><!-- .entry-content -->
+                <footer class="entry-meta">
+                    <?php edit_post_link( __( 'Edit', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?>
+                </footer><!-- .entry-meta -->
+            </article><!-- #post -->
 
-        <?php
-            endif;
-        endforeach;
-        ?>
+        <?php endwhile; // End of the loop. ?>
 
     </div><!-- #content -->
 </div><!-- #primary -->
