@@ -70,7 +70,7 @@
                 <table class="wp-list-table widefat fixed striped tags">
                     <thead>
                         <tr>
-                            <th><?php _e('Title'); ?></th>
+                            <th class="column-title"><?php _e('Title'); ?></th>
                             <th class="column-posts"><?php _e('ID'); ?></th>
                         </tr>
                     </thead>
