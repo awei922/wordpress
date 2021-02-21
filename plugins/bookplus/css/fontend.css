@@ -1,5 +1,5 @@
 .nav-document {
-    margin-top: 2em;
+    margin-top: 5em;
 }
 
 .nav-document h3 {
@@ -22,11 +22,11 @@
 .list-document ul a,
 .nav-document ul a {
     position: relative;
-    padding-left: 1.4em;
+    padding-left: 1.5em;
 }
 
 .list-document ul a {
-    font-size: 1.4em;
+    font-size: 1.5em;
 }
 
 .list-document ul a::before,

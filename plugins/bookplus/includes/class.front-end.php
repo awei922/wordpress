@@ -30,11 +30,6 @@ class BookPlus_FrontEnd
             return wp_trim_words($content, 55, ' &hellip; ' . $link);
         }
 
-        // single
-        if (is_single() && BookPlus_Settings::get_option('register_document')) {
-            $content .= BookPlus_Document::nav_document();
-        }
-
         //if post password
         if (post_password_required($post) && BookPlus_Settings::get_option('split_protected_posts')) {
             $content = explode('<!--more-->', $post->post_content)[0] . $content;
@@ -43,6 +38,11 @@ class BookPlus_FrontEnd
         // target="_blank"
         if (BookPlus_Settings::get_option('target_equal_blank')) {
             $content = str_replace('<a', '<a target="_blank" rel="nofollow"', $content);
+        }
+
+        // document
+        if (is_single() && BookPlus_Settings::get_option('register_document')) {
+            $content .= BookPlus_Document::nav_document();
         }
 
         return $content;
