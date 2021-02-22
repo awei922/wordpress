@@ -6,10 +6,10 @@ if (!function_exists('the_breadcrumb')) {
         global $post;
 
         $html = '<span class="breadcrumb">';
-        if (!is_front_page()) {
-            $html .= '<a href="' . get_bloginfo('url') . '">' . __('Home');
-            $html .= '</a><span class="seprater"> &raquo; </span>';
+        $html .= '<a href="' . get_bloginfo('url') . '">' . __('Home');
+        $html .= '</a><span class="seprater"> &raquo; </span>';
 
+        if (!is_front_page()) {
             if (is_category() || is_single()) {
                 $html .= get_the_category_list(', ');
                 if (is_single()) {
@@ -28,10 +28,10 @@ if (!function_exists('the_breadcrumb')) {
             } elseif (is_404()) {
                 $html .= '<span class="current">' . get_the_title() . '</span>';
             }else{
-                $html .= __('Post');
+                $html .= '<span class="current">' . __('Post') . '</span>';
             }
         } else {
-            $html .= __('Home');
+            $html .= '<span class="current">' . __('Last Post') . '</span>';
         }
         $html .= '</span>';
 

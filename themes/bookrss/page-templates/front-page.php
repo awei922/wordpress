@@ -14,44 +14,29 @@
 
 get_header(); ?>
 
-<div id="primary" class="site-content">
-    <div id="content" role="main">
+	<div id="primary" class="site-content">
+		<div id="content" role="main">
 
-        <?php if ( has_post_thumbnail() ) : ?>
-            <div class="entry-page-image">
-                <?php the_post_thumbnail(); ?>
-            </div><!-- .entry-page-image -->
-        <?php endif; ?>
+            <?php if ( has_post_thumbnail() ) : ?>
+                <div class="entry-page-image">
+                    <?php the_post_thumbnail(); ?>
+                </div><!-- .entry-page-image -->
+            <?php endif; ?>
 
-        <?php
-        global $wp_query;
-        $wp_query->query(['posts_per_page'=>1]);
-        while ( have_posts() ) :
-            the_post();
-            ?>
+			<?php
+            global $wp_query;
+            $wp_query->query(['posts_per_page'=>1]);
+			while ( have_posts() ) :
+				the_post();
+				?>
 
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <header class="entry-header">
-                    <?php if ( ! is_page_template( 'page-templates/front-page.php' ) ) : ?>
-                        <?php the_post_thumbnail(); ?>
-                    <?php endif; ?>
-                    <h1 class="entry-title">
-                        <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
-                    </h1>
-                </header>
+				<?php get_template_part( 'content'); ?>
 
-                <div class="entry-content">
-                    <?php the_excerpt(); ?>
-                </div><!-- .entry-content -->
-                <footer class="entry-meta">
-                    <a class="more-link" href="<?php echo esc_url(get_permalink( get_option( 'page_for_posts' ))) ?>"><?php  _e('Read more...') ?></a>
-                </footer><!-- .entry-meta -->
-            </article><!-- #post -->
+			<?php endwhile; // End of the loop. ?>
 
-        <?php endwhile; // End of the loop. ?>
-
-    </div><!-- #content -->
-</div><!-- #primary -->
+            <a class="more-link" href="<?php echo esc_url(get_permalink( get_option( 'page_for_posts' ))) ?>"><?php  _e('Read more...') ?></a>
+		</div><!-- #content -->
+	</div><!-- #primary -->
 
 <?php get_sidebar( 'front' ); ?>
 <?php get_footer(); ?>
