@@ -21,38 +21,16 @@
 
 .list-document ul a,
 .nav-document ul a {
-    position: relative;
-    padding-left: 1.5em;
+    font-size: small;
 }
 
 .list-document ul a {
     font-size: 1.2em;
 }
-
-.list-document ul a::before,
-.nav-document ul a::before {
-    position: absolute;
-    background-image: url("../img/document.svg");
-    background-size: 1.2em;
-    background-repeat: no-repeat;
-    display: inline-block;
-    content: '';
-    width: 1.2em;
-    height: 1.2em;
-    left: 0;
-    bottom: 0;
-}
-
-.list-document ul a::before,
-.nav-document ul li.page_item_has_children > a::before {
-    background-image: url("../img/folder.svg");
-}
-
 .nav-document li.page_item_has_children ul {
     margin-left: 1em !important;
 }
 
-.breadcrumb .current,
 .nav-document li.current_page_parent > a,
 .nav-document li.current_page_item > a {
     font-weight: bold;

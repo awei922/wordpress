@@ -144,6 +144,7 @@ class BookPlus_Document
                 'meta_value' => BookPlus::$meta_value,
                 'sort_column' => 'menu_order',
                 'show_date' => true,
+                'link_before' => '<i class="fa fa-folder-o" aria-hidden="true"></i> '
             ]
         );
 
@@ -176,6 +177,7 @@ class BookPlus_Document
                 'title_li' => '',
                 'post_type' => BookPlus::$post_type,
                 'sort_column' => 'menu_order',
+                'link_before' => '<i class="fa fa-file-text-o" aria-hidden="true"></i> '
             ]
         );
 

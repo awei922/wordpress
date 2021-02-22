@@ -9,7 +9,7 @@ $color_0366d6: #0366d6;
 $max_height: 400px;
 $max_width: 960px;
 
-$font_size: 16px;
+$font_size: 15px;
 
 // reset
 body {
@@ -31,7 +31,6 @@ input,
 select,
 textarea {
     border-radius: 0 !important;
-    padding: 10px;
 }
 
 table {
@@ -84,13 +83,6 @@ body {
             }
         }
     }
-
-    .main-navigation {
-        a {
-            font-size: small;
-        }
-    }
-
 }
 
 @include breakpoint(0, 600px) {
@@ -152,6 +144,10 @@ body {
     blockquote {
         font-size: inherit;
     }
+
+    input {
+        line-height: initial;
+    }
 }
 
 // comments
@@ -161,14 +157,7 @@ body {
 }
 
 // widget
-.widget-area {
-    .widget {
-        li {
-            font-size: inherit;
-        }
-    }
-}
-.widget-title{
+.widget-title {
     font-size: initial;
 }
 
@@ -179,6 +168,10 @@ body {
         #s {
             flex: 1;
         }
+
+        input {
+            padding: 0.8em;
+        }
     }
 }
 
@@ -188,7 +181,6 @@ footer[role="contentinfo"] {
     color: $color_fff;
     max-width: initial;
     background-color: $color_2a4861;
-    font-size: inherit;
 
     a {
         color: $color_fff;
