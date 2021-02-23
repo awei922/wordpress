@@ -142,7 +142,7 @@ class BookPlus_Document
                 'post_type' => BookPlus::$post_type,
                 'meta_key' => BookPlus::$meta_key,
                 'meta_value' => BookPlus::$meta_value,
-                'sort_column' => 'menu_order',
+                'sort_column' => 'menu_order, post_date',
                 'show_date' => true,
                 'link_before' => '<i class="fa fa-folder-o" aria-hidden="true"></i> '
             ]
@@ -176,7 +176,8 @@ class BookPlus_Document
                 'child_of' => $parent_post->ID,
                 'title_li' => '',
                 'post_type' => BookPlus::$post_type,
-                'sort_column' => 'menu_order',
+                'sort_column' => 'menu_order, post_date',
+                'show_date' => true,
                 'link_before' => '<i class="fa fa-file-text-o" aria-hidden="true"></i> '
             ]
         );

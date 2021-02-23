@@ -14,15 +14,11 @@
     margin: 0 !important;
     padding: 0 !important;
     list-style: none;
-}
-
-.list-document ul a,
-.nav-document ul a {
     font-size: small;
 }
-
+.nav-document ul a,
 .list-document ul a {
-    font-size: 1.2em;
+    font-size: large;
 }
 
 .nav-document li.page_item_has_children ul {

@@ -108,7 +108,7 @@ class BookPlus_Ajax
             'meta_key' => BookPlus::$meta_key,
             'meta_value' => BookPlus::$meta_value,
             'numberposts' => -1,
-            'orderby' => 'menu_order',
+            'orderby' => 'menu_order, post_date',
             'order' => 'ASC',
             'post_status' => ['publish', 'draft', 'pending']
         ]);
@@ -126,7 +126,7 @@ class BookPlus_Ajax
             $postChildren = get_pages([
                 'child_of' => $post_id,
                 'post_type' => BookPlus::$post_type,
-                'sort_column' => 'menu_order',
+                'sort_column' => 'menu_order, post_date',
                 'post_status' => ['publish', 'draft', 'pending']
             ]);
 
