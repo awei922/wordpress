@@ -97,7 +97,8 @@ class BookPlus_Document
             return false;
         }
 
-        if (is_admin() || is_singular()) {
+        if (!is_archive()) {
+        }else{
             return false;
         }
 
