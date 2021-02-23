@@ -42,14 +42,15 @@ function bookrss_excerpt_more($link)
 
 add_filter('excerpt_more', 'bookrss_excerpt_more');
 
-function bookrss_sidebar_registration() {
+function bookrss_sidebar_registration()
+{
 
     // Arguments used in all register_sidebar() calls.
     $shared_args = array(
-        'before_title'  => '<h2 class="widget-title subheading heading-size-3">',
-        'after_title'   => '</h2>',
+        'before_title' => '<h2 class="widget-title subheading heading-size-3">',
+        'after_title' => '</h2>',
         'before_widget' => '<div class="widget %2$s"><div class="widget-content">',
-        'after_widget'  => '</div></div>',
+        'after_widget' => '</div></div>',
     );
 
     // Sidebar #0.
@@ -57,12 +58,12 @@ function bookrss_sidebar_registration() {
         array_merge(
             $shared_args,
             array(
-                'name'        => __( 'Sidebar'),
-                'id'          => 'sidebar-0',
-                'description' => __( 'Sidebar'),
+                'name' => __('Sidebar'),
+                'id' => 'sidebar-0',
+                'description' => __('Sidebar'),
             )
         )
     );
 }
 
-add_action( 'widgets_init', 'bookrss_sidebar_registration' );
+add_action('widgets_init', 'bookrss_sidebar_registration');

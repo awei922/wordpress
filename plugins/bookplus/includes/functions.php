@@ -27,7 +27,7 @@ if (!function_exists('the_breadcrumb')) {
                 $html .= '<span class="current">' . get_the_title() . '</span>';
             } elseif (is_404()) {
                 $html .= '<span class="current">' . get_the_title() . '</span>';
-            }else{
+            } else {
                 $html .= '<span class="current">' . __('Post') . '</span>';
             }
         } else {
@@ -38,3 +38,32 @@ if (!function_exists('the_breadcrumb')) {
         echo $html;
     }
 }
+
+if (!function_exists('the_recent_posts')) {
+    function the_recent_posts()
+    {
+        ?>
+        <h2><?php _e('Recent Posts'); ?></h2>
+
+        <ul>
+            <?php
+            global $wp_query;
+            $wp_query->query(['posts_per_page' => 10]);
+
+            while (have_posts()) {
+                the_post();
+                ?>
+                <li>
+                    <span class="post-date"><?php echo esc_html(get_the_date()); ?>&raquo;</span>
+                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                </li>
+            <?php } ?>
+            <li>
+                <a class="more-link"
+                   href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))) ?>"><?php _e('Read more...') ?></a>
+            </li>
+        </ul>
+        <?php
+    }
+}
+?>
