@@ -19,8 +19,8 @@ add_action('wp_enqueue_scripts', 'bookrss_enqueue_scripts');
 
 function bookrss_dequeue_scripts()
 {
-    wp_dequeue_style('twentytwelve-fonts');
-    wp_dequeue_style('twentytwelve-block-style');
+    wp_dequeue_style('twentytwenty-fonts');
+    wp_dequeue_style('twentytwenty-block-style');
 }
 
 add_action('wp_enqueue_scripts', 'bookrss_dequeue_scripts', 99);
@@ -41,3 +41,28 @@ function bookrss_excerpt_more($link)
 }
 
 add_filter('excerpt_more', 'bookrss_excerpt_more');
+
+function bookrss_sidebar_registration() {
+
+    // Arguments used in all register_sidebar() calls.
+    $shared_args = array(
+        'before_title'  => '<h2 class="widget-title subheading heading-size-3">',
+        'after_title'   => '</h2>',
+        'before_widget' => '<div class="widget %2$s"><div class="widget-content">',
+        'after_widget'  => '</div></div>',
+    );
+
+    // Sidebar #0.
+    register_sidebar(
+        array_merge(
+            $shared_args,
+            array(
+                'name'        => __( 'Sidebar'),
+                'id'          => 'sidebar-0',
+                'description' => __( 'Sidebar'),
+            )
+        )
+    );
+}
+
+add_action( 'widgets_init', 'bookrss_sidebar_registration' );
