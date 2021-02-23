@@ -1,10 +1,10 @@
-.nav-document {
-    margin-top: 5em;
+.nav-document:not(:first-child) h3 {
+    border-top: 1px solid #ccc;
 }
 
-.nav-document h3 {
-    border-top: 1px solid #eee;
-    padding-top: 1em;
+.nav-document:first-child h3 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 .list-document ul,
@@ -15,9 +15,6 @@
     padding: 0 !important;
     list-style: none;
 }
-.list-document li{
-    color: #aaa;
-}
 
 .list-document ul a,
 .nav-document ul a {
@@ -27,6 +24,7 @@
 .list-document ul a {
     font-size: 1.2em;
 }
+
 .nav-document li.page_item_has_children ul {
     margin-left: 1em !important;
 }

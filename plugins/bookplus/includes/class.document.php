@@ -149,7 +149,7 @@ class BookPlus_Document
         );
 
         if (!empty($list)) {
-            $content .= '<section class="list-document"><ul>' . $list . '</ul></section>';
+            $content .= '<div class="list-document"><ul>' . $list . '</ul></div>';
         }
 
         return $content;
@@ -182,7 +182,7 @@ class BookPlus_Document
         );
 
         if (!empty($list)) {
-            $content .= '<section class="nav-document"><h3>' . __('Documentation') . '：<a href="' . get_permalink($parent_post) . '">' . $parent_post->post_title . '</a></h3><ul>' . $list . '</ul></section>';
+            $content .= '<div class="nav-document"><h3>' . __('Documentation') . '：<a href="' . get_permalink($parent_post) . '">' . $parent_post->post_title . '</a></h3><ul>' . $list . '</ul></div>';
         }
 
         return $content;
