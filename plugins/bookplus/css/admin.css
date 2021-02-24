@@ -1,5 +1,4 @@
 /*document*/
-
 .bookplus-wrap .col-container {
     padding-top: 28px;
 }
@@ -32,7 +31,7 @@
 
 .bookplus-wrap .post-body h3:hover > .row-actions,
 .bookplus-wrap .post-body li:hover > .row-actions,
-.bookplus-wrap .post-body .section-title:hover > .row-actions{
+.bookplus-wrap .post-body .section-title:hover > .row-actions {
     left: auto;
 }
 
@@ -55,7 +54,7 @@
     border-left: 1px solid #eee;
 }
 
-.bookplus-wrap .post-body ul.articles li{
+.bookplus-wrap .post-body ul.articles li {
     padding: 10px 0;
 }
 
@@ -89,7 +88,7 @@
 }
 
 /*settings*/
-.bookplus-wrap .form-table [scope="row"] label{
+.bookplus-wrap .form-table [scope="row"] label {
     cursor: initial;
 }
 

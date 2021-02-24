@@ -11,11 +11,18 @@ function bookrss_enqueue_scripts()
         wp_enqueue_script('bookrss-test-js', '//localhost:8080/main.js');
         return false;
     }
-    wp_enqueue_style('bookrss-style', get_stylesheet_directory_uri() . '/assets/dist/style.css');
 
+    wp_enqueue_style('bookrss-style', get_stylesheet_directory_uri() . '/assets/dist/style.css');
 }
 
 add_action('wp_enqueue_scripts', 'bookrss_enqueue_scripts');
+
+function bookrss_block_editor_styles()
+{
+    wp_enqueue_style('bookrss-block-editor-styles', get_stylesheet_directory_uri() . '/assets/dist/style.css');
+}
+
+add_action('enqueue_block_editor_assets', 'bookrss_block_editor_styles');
 
 function bookrss_dequeue_scripts()
 {

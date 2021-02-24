@@ -30,6 +30,15 @@ a {
     text-decoration: none;
 }
 
+// editor-styles
+.editor-styles-wrapper .wp-block-quote {
+    margin: auto;
+}
+
+.editor-post-title__block .editor-post-title__input {
+    font-size: 36px;
+}
+
 // common
 @mixin heading-size() {
     h1,
