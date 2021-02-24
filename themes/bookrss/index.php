@@ -1,133 +1,127 @@
-<?php
-/**
- * The main template file
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package WordPress
- * @subpackage Twenty_Twenty
- * @since Twenty Twenty 1.0
- */
+<?php get_header(); ?>
 
-get_header();
-?>
+<main id="site-content" role="main">
+    <div class="container">
 
-    <main id="site-content" role="main">
+        <div class="row">
 
-        <?php
+            <div class="col-mb-12 col-8">
 
-        $archive_title    = '';
-        $archive_subtitle = '';
+                <?php
 
-        if ( is_search() ) {
-            global $wp_query;
+                $archive_title 		= get_the_archive_title();
+                $archive_subtitle 	= get_the_archive_description( '<div>', '</div>' );
 
-            $archive_title = sprintf(
-                '%1$s %2$s',
-                '<span class="color-accent">' . __( 'Search:', 'twentytwenty' ) . '</span>',
-                '&ldquo;' . get_search_query() . '&rdquo;'
-            );
+                // Check if we should show the archive header on the blog page
+                $show_home_header = get_theme_mod( 'chaplin_show_archive_header_on_home', false );
 
-            if ( $wp_query->found_posts ) {
-                $archive_subtitle = sprintf(
-                /* translators: %s: Number of search results. */
-                    _n(
-                        'We found %s result for your search.',
-                        'We found %s results for your search.',
-                        $wp_query->found_posts,
-                        'twentytwenty'
-                    ),
-                    number_format_i18n( $wp_query->found_posts )
-                );
-            } else {
-                $archive_subtitle = __( 'We could not find any results for your search. You can give it another try through the search form below.', 'twentytwenty' );
-            }
-        } elseif ( is_archive() && ! have_posts() ) {
-            $archive_title = __( 'Nothing Found', 'twentytwenty' );
-        } elseif ( ! is_home() ) {
-            $archive_title    = get_the_archive_title();
-            $archive_subtitle = get_the_archive_description();
-        }
+                if ( ( ! is_home() || is_home() && $show_home_header ) && ( $archive_title || $archive_subtitle ) ) : ?>
 
-        if ( $archive_title || $archive_subtitle ) {
-            ?>
+                    <header class="archive-header section-inner">
 
-            <header class="archive-header has-text-align-center header-footer-group">
+                        <?php
 
-                <div class="archive-header-inner section-inner medium">
+                        /*
+                         * @hooked chaplin_maybe_output_breadcrumbs - 10
+                         */
+                        do_action( 'chaplin_archive_header_start' );
 
-                    <?php if ( $archive_title ) { ?>
-                        <h1 class="archive-title"><?php echo wp_kses_post( $archive_title ); ?></h1>
-                    <?php } ?>
+                        if ( $archive_title ) :
+                            ?>
+                            <h1 class="archive-title"><?php echo wp_kses_post( $archive_title ); ?></h1>
+                            <?php
+                        endif;
 
-                    <?php if ( $archive_subtitle ) { ?>
-                        <div class="archive-subtitle section-inner thin max-percentage intro-text"><?php echo wp_kses_post( wpautop( $archive_subtitle ) ); ?></div>
-                    <?php } ?>
+                        if ( $archive_subtitle ) :
+                            ?>
+                            <div class="archive-subtitle section-inner thin max-percentage intro-text"><?php echo wp_kses_post( wpautop( $archive_subtitle ) ); ?></div>
+                            <?php
+                        endif;
 
-                </div><!-- .archive-header-inner -->
+                        do_action( 'chaplin_archive_header_end' );
 
-            </header><!-- .archive-header -->
-
-        <?php } ?>
-
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-mb-12 col-8">
-
-                    <?php
-                    if ( have_posts() ) {
-
-                        $i = 0;
-
-                        while ( have_posts() ) {
-                            $i++;
-                            if ( $i > 1 ) {
-                                echo '<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />';
-                            }
-                            the_post();
-
-                            get_template_part( 'template-parts/content', get_post_type() );
-
-                        }
-                    } elseif ( is_search() ) {
                         ?>
 
-                        <div class="no-search-results-form section-inner thin">
+                    </header><!-- .archive-header -->
+
+                <?php endif; ?>
+
+                <div class="posts section-inner">
+
+                    <?php if ( have_posts() ) :
+
+                        /*
+                         * @hooked chaplin_output_previous_posts_link - 10
+                         */
+                        do_action( 'chaplin_posts_start' );
+
+                        $post_grid_column_classes = chaplin_get_post_grid_column_classes();
+
+                        ?>
+
+                        <div class="posts-grid grid load-more-target <?php echo $post_grid_column_classes; ?>">
 
                             <?php
-                            get_search_form(
-                                array(
-                                    'label' => __( 'search again', 'twentytwenty' ),
-                                )
-                            );
+
+                            // Calculate the current offset
+                            $iteration = intval( $wp_query->get( 'posts_per_page' ) ) * intval( $wp_query->get( 'paged' ) );
+
+                            while ( have_posts() ) : the_post();
+
+                                $iteration++;
+
+                                /**
+                                 * Fires before output of a grid item in the posts loop.
+                                 *
+                                 * Allows output of custom elements within the posts loop, like banners.
+                                 * To add markup spanning the entire width of the posts grid, wrap it in the following element:
+                                 * <div class="grid-item col-1">[Your content]</div>
+                                 * @param int   $post_id 	Post ID.
+                                 * @param int   $iteration 	The current iteration of the loop.
+                                 */
+                                do_action( 'chaplin_posts_loop_before_grid_item', $post->ID, $iteration );
+                                ?>
+
+                                <div class="grid-item">
+                                    <?php get_template_part( 'parts/preview', get_post_type() ); ?>
+                                </div><!-- .grid-item -->
+
+                                <?php
+
+                                /**
+                                 * Fires after output of a grid item in the posts loop.
+                                 */
+                                do_action( 'chaplin_posts_loop_after_grid_item', $post->ID, $iteration );
+
+                            endwhile;
                             ?>
+
+                        </div><!-- .posts-grid -->
+
+                        <?php do_action( 'chaplin_posts_end' ); ?>
+
+                    <?php elseif ( is_search() ) : ?>
+
+                        <div class="no-search-results-form">
+
+                            <?php get_search_form(); ?>
 
                         </div><!-- .no-search-results -->
 
-                        <?php
-                    }
-                    ?>
+                    <?php endif; ?>
 
-                    <?php get_template_part( 'template-parts/pagination' ); ?>
+                </div><!-- .posts -->
 
-                </div>
-
-                <?php get_sidebar(); ?>
+                <?php get_template_part( 'pagination' ); ?>
 
             </div>
 
+            <?php get_sidebar(); ?>
+
         </div>
 
-    </main><!-- #site-content -->
+    </div>
 
-<?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
+</main><!-- #site-content -->
 
-<?php
-get_footer();
+<?php get_footer(); ?>

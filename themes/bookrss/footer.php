@@ -1,56 +1,92 @@
-<?php
-/**
- * The template for displaying the footer
- *
- * Contains the opening of the #site-footer div and all content after.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package WordPress
- * @subpackage Twenty_Twenty
- * @since Twenty Twenty 1.0
- */
+        <?php
 
-?>
-            <footer id="site-footer" role="contentinfo" class="header-footer-group">
+		$only_content_templates = array( 'template-only-content.php', 'template-full-width-only-content.php' );
+		$show_footer = apply_filters( 'chaplin_show_header_footer_on_only_content_templates', false );
 
-                <div class="section-inner">
+		// Don't output the markup of the footer on the only content templates, unless filtered to do so
+		if ( ! is_page_template( $only_content_templates ) || $show_footer ) : ?>
+		
+			<footer id="site-footer" role="contentinfo">
 
-                    <div class="footer-credits">
+				<?php do_action( 'chaplin_footer_start' ); ?>
 
-                        <p class="footer-copyright">&copy;
-                            <?php
-                            echo date_i18n(
-                            /* translators: Copyright date format, see https://www.php.net/manual/datetime.format.php */
-                                _x( 'Y', 'copyright date format', 'twentytwenty' )
-                            );
-                            ?>
-                            <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?> .</a>
+				<?php if ( is_active_sidebar( 'footer-one' ) || is_active_sidebar( 'footer-two' ) ) : ?>
+
+					<div class="footer-widgets-outer-wrapper border-color-border section-inner">
+					
+						<div class="footer-widgets-wrapper grid tcols-2">
+
+							<?php if ( is_active_sidebar( 'footer-one' ) ) : ?>
+								<div class="footer-widgets column-one grid-item">
+									<?php dynamic_sidebar( 'footer-one' ); ?>
+								</div>
+							<?php endif; ?>
+
+							<?php if ( is_active_sidebar( 'footer-two' ) ) : ?>
+								<div class="footer-widgets column-two grid-item">
+									<?php dynamic_sidebar( 'footer-two' ); ?>
+								</div>
+							<?php endif; ?>
+
+						</div><!-- .footer-widgets-wrapper -->
+						
+					</div><!-- .footer-widgets-outer-wrapper -->
+
+				<?php endif; 
+
+				$has_footer_menu = has_nav_menu( 'footer-menu' );
+
+				$footer_inner_classes = '';
+
+				if ( $has_footer_menu ) {
+					$footer_inner_classes .= ' has-footer-menu';
+				}
+				
+				?>
+
+				<div class="footer-inner section-inner<?php echo esc_attr( $footer_inner_classes ); ?>">
+
+					<?php if ( $has_footer_menu ) : ?>
+
+						<ul class="footer-menu reset-list-style">
+							<?php
+							wp_nav_menu( array(
+								'container' 		=> '',
+								'depth'				=> 1,
+								'items_wrap' 		=> '%3$s',
+								'theme_location' 	=> 'footer-menu',
+							) );
+							?>
+						</ul><!-- .site-nav -->
+
+					<?php endif; ?>
+
+					<div class="footer-credits">
+
+						<p class="footer-copyright">&copy; <?php echo esc_html( date_i18n( __( 'Y', 'chaplin' ) ) ); ?> <a href="<?php echo esc_url( home_url() ); ?>" rel="home"><?php echo bloginfo( 'name' ); ?></a></p>
+
+						<p class="theme-credits color-secondary">
                             <a href="http://www.beian.miit.gov.cn" target="_blank" rel="nofollow"> 粤ICP备14048036号.</a>
-                        </p><!-- .footer-copyright -->
+						</p><!-- .theme-credits -->
 
-                    </div><!-- .footer-credits -->
+                        <a class="alignright" href="#page">
+                            <?php _e('Top') ?> &uparrow;
+                        </a><!-- .to-the-top -->
 
-                    <a class="to-the-top" href="#site-header">
-                                    <span class="to-the-top-long">
-                                        <?php
-                                        /* translators: %s: HTML character for up arrow. */
-                                        printf( __( 'To the top %s', 'twentytwenty' ), '<span class="arrow" aria-hidden="true">&uarr;</span>' );
-                                        ?>
-                                    </span><!-- .to-the-top-long -->
-                        <span class="to-the-top-short">
-                                        <?php
-                                        /* translators: %s: HTML character for up arrow. */
-                                        printf( __( 'Up %s', 'twentytwenty' ), '<span class="arrow" aria-hidden="true">&uarr;</span>' );
-                                        ?>
-                                    </span><!-- .to-the-top-short -->
-                    </a><!-- .to-the-top -->
+					</div><!-- .footer-credits -->
 
-                </div><!-- .section-inner -->
+				</div><!-- .footer-bottom -->
 
-            </footer><!-- #site-footer -->
+				<?php do_action( 'chaplin_footer_end' ); ?>
 
-        <?php wp_footer(); ?>
+			</footer><!-- #site-footer -->
+
+			<?php 
+		endif;
+		
+		wp_footer(); 
+		
+		?>
 
     </body>
 </html>
