@@ -1,11 +1,12 @@
-.nav-document:not(:first-child) h3 {
-    border-top: 1px solid #ccc;
+.nav-document:not(:first-child) {
     margin-top: 5em;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
 }
 
-.nav-document:first-child h3 {
+.nav-document h3 {
     margin-top: 0 !important;
-    padding-top: 0 !important;
+    padding: 0 !important;
 }
 
 .list-document ul,

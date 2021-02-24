@@ -2,6 +2,8 @@
 $max_height: 400px;
 $max_width: 120rem;
 
+$color_ccc: #ccc;
+
 // reset
 pre {
     max-height: $max_height;
@@ -100,6 +102,14 @@ a {
 .singular .entry-header,
 .archive-header {
     padding: 4rem 0;
+}
+
+.author-bio {
+    border-top: 1px solid $color_ccc;
+
+    .avatar {
+        top: 1rem;
+    }
 }
 
 .markdown-body {
