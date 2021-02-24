@@ -30,6 +30,30 @@ a {
     text-decoration: none;
 }
 
+.markdown-body {
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+
+    li {
+        margin-left: 0;
+    }
+
+    a {
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    blockquote {
+        font-size: inherit;
+    }
+
+    input {
+        line-height: initial;
+    }
+}
+
 // editor-styles
 .editor-styles-wrapper .wp-block-quote {
     margin: auto;
@@ -117,31 +141,7 @@ a {
     border-top: 1px solid $color_ccc;
 
     .avatar {
-        top: 1rem;
-    }
-}
-
-.markdown-body {
-    color: inherit;
-    font-size: inherit;
-    font-family: inherit;
-
-    li {
-        margin-left: 0;
-    }
-
-    a {
-        &:hover {
-            text-decoration: none;
-        }
-    }
-
-    blockquote {
-        font-size: inherit;
-    }
-
-    input {
-        line-height: initial;
+        margin-top: 1rem;
     }
 }
 
