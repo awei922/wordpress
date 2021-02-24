@@ -1,5 +1,6 @@
 .nav-document:not(:first-child) h3 {
     border-top: 1px solid #ccc;
+    margin-top: 5em;
 }
 
 .nav-document:first-child h3 {
@@ -14,10 +15,11 @@
     margin: 0 !important;
     padding: 0 !important;
     list-style: none;
-    font-size: small;
+    font-size: smaller;
 }
-.nav-document ul a,
-.list-document ul a {
+
+.nav-document li a,
+.list-document li a {
     font-size: large;
 }
 

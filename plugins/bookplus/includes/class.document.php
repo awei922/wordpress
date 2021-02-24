@@ -98,7 +98,7 @@ class BookPlus_Document
         }
 
         if (!is_archive()) {
-        }else{
+        } else {
             return false;
         }
 
@@ -145,7 +145,8 @@ class BookPlus_Document
                 'meta_value' => BookPlus::$meta_value,
                 'sort_column' => 'menu_order, post_date',
                 'show_date' => true,
-                'link_before' => '<i class="fa fa-folder-o" aria-hidden="true"></i> '
+                'link_before' => '<i class="fa fa-folder-o" aria-hidden="true"></i> ',
+                'link_after' => '&rarr;'
             ]
         );
 
@@ -179,7 +180,8 @@ class BookPlus_Document
                 'post_type' => BookPlus::$post_type,
                 'sort_column' => 'menu_order, post_date',
                 'show_date' => true,
-                'link_before' => '<i class="fa fa-file-text-o" aria-hidden="true"></i> '
+                'link_before' => '<i class="fa fa-file-text-o" aria-hidden="true"></i> ',
+                'link_after' => '&rarr;'
             ]
         );
 

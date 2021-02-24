@@ -3,11 +3,6 @@ $max_height: 400px;
 $max_width: 120rem;
 
 // reset
-pre,
-code {
-    font-family: Menlo, Monaco, Consolas, "Lucida Console", "Courier New", monospace;
-}
-
 pre {
     max-height: $max_height;
 }
@@ -42,6 +37,7 @@ a {
 
     h2,
     h2.entry-title,
+    .comment-reply-title,
     .heading-size-2 {
         font-size: 3.2rem;
     }
@@ -67,7 +63,7 @@ a {
     }
 }
 
-@include breakpoint(1220 pxpx) {
+@include breakpoint(1220px) {
     @include heading-size();
 }
 
@@ -82,10 +78,10 @@ a {
 }
 
 .container {
-    padding-top: 4rem;
+    padding-top: 5rem;
 }
 
-@include breakpoint(768px) {
+@include breakpoint(700px) {
     .container {
         max-width: $max_width;
         width: calc(100% - 8rem);
@@ -133,6 +129,7 @@ a {
 // home
 .home {
     .entry-header {
+        color: inherit;
         background-color: inherit !important;
         padding-top: 0;
     }

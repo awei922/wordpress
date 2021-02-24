@@ -44,8 +44,6 @@ add_filter('excerpt_more', 'bookrss_excerpt_more');
 
 function bookrss_sidebar_registration()
 {
-
-    // Arguments used in all register_sidebar() calls.
     $shared_args = array(
         'before_title' => '<h2 class="widget-title subheading heading-size-3">',
         'after_title' => '</h2>',
@@ -53,7 +51,6 @@ function bookrss_sidebar_registration()
         'after_widget' => '</div></div>',
     );
 
-    // Sidebar #0.
     register_sidebar(
         array_merge(
             $shared_args,
