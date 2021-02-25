@@ -5,10 +5,6 @@ $max_width: 120rem;
 $color_ccc: #ccc;
 
 // reset
-pre {
-    max-height: $max_height;
-}
-
 button,
 input,
 select,
@@ -51,6 +47,10 @@ a {
 
     input {
         line-height: initial;
+    }
+
+    pre {
+        max-height: $max_height;
     }
 }
 
