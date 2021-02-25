@@ -40,14 +40,18 @@ class BookPlus_FrontEnd
             $content = str_replace('<a', '<a target="_blank" rel="nofollow"', $content);
         }
 
-        // document
-        if (is_singular() && BookPlus_Settings::get_option('register_document')) {
+        // markdown-body
+        if (is_singular()) {
             if (empty($content)) {
                 $content = '';
             } else {
                 $content = '<div class="markdown-body">' . $content . '</div>';
             }
-            $content .= BookPlus_Document::nav_document();
+
+            // document
+            if (is_single() && BookPlus_Settings::get_option('register_document')) {
+                $content .= BookPlus_Document::nav_document();
+            }
         }
 
         return $content;
