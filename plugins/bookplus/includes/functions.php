@@ -43,26 +43,27 @@ if (!function_exists('the_recent_posts')) {
     function the_recent_posts()
     {
         ?>
-        <h2><?php _e('Recent Posts'); ?></h2>
+        <div class="recent-posts">
+            <h2><?php _e('Recent Posts'); ?></h2>
+            <ul>
+                <?php
+                global $wp_query;
+                $wp_query->query(['posts_per_page' => 15]);
 
-        <ul>
-            <?php
-            global $wp_query;
-            $wp_query->query(['posts_per_page' => 10]);
-
-            while (have_posts()) {
-                the_post();
-                ?>
+                while (have_posts()) {
+                    the_post();
+                    ?>
+                    <li>
+                        <span class="post-date"><?php echo esc_html(get_the_date()); ?>&raquo;</span>
+                        <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                    </li>
+                <?php } ?>
                 <li>
-                    <span class="post-date"><?php echo esc_html(get_the_date()); ?>&raquo;</span>
-                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                    <a class="more-link"
+                       href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))) ?>"><?php _e('Read more...') ?></a>
                 </li>
-            <?php } ?>
-            <li>
-                <a class="more-link"
-                   href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))) ?>"><?php _e('Read more...') ?></a>
-            </li>
-        </ul>
+            </ul>
+        </div>
         <?php
     }
 }

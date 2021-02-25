@@ -3,8 +3,18 @@ $max_height: 400px;
 $max_width: 112rem;
 
 $color_ccc: #ccc;
+$color_999: #999;
 
 // reset
+body {
+    font-family: "Droid Serif", Georgia, "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "WenQuanYi Micro Hei", "Microsoft Yahei", serif;
+}
+
+pre,
+code {
+    font-family: Menlo, Monaco, Consolas, "Lucida Console", "Courier New", monospace;
+}
+
 button,
 input,
 select,
@@ -23,9 +33,10 @@ table tr:first-child td:last-child {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
+// common
 .markdown-body {
     color: inherit;
     font-size: inherit;
@@ -54,7 +65,10 @@ a {
     }
 }
 
-// common
+.more-link {
+    color: $color_999 !important;
+    font-size: smaller;
+}
 
 // site
 .row [class*="col-"] {
@@ -65,7 +79,7 @@ a {
 @include breakpoint(700px) {
     .container {
         max-width: $max_width;
-        width: calc(100% - 8rem);
+        width: calc(100% - 10rem);
 
         .section-inner {
             width: 100%;
@@ -73,8 +87,17 @@ a {
     }
 }
 
-// content
+// sidebar
+.widget-area {
+    ul {
+        margin-left: 0;
+    }
+}
 
+// footer
+.footer-credits {
+    justify-content: space-between !important;
+}
 
 // home
 .home {
@@ -88,7 +111,6 @@ a {
     }
 
     .recent-posts {
-
         ul {
             margin-left: 0;
         }

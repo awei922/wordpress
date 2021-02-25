@@ -5,7 +5,7 @@
 
 		// Don't output the markup of the footer on the only content templates, unless filtered to do so
 		if ( ! is_page_template( $only_content_templates ) || $show_footer ) : ?>
-		
+
 			<footer id="site-footer" role="contentinfo">
 
 				<?php do_action( 'chaplin_footer_start' ); ?>
@@ -13,7 +13,7 @@
 				<?php if ( is_active_sidebar( 'footer-one' ) || is_active_sidebar( 'footer-two' ) ) : ?>
 
 					<div class="footer-widgets-outer-wrapper border-color-border section-inner">
-					
+
 						<div class="footer-widgets-wrapper grid tcols-2">
 
 							<?php if ( is_active_sidebar( 'footer-one' ) ) : ?>
@@ -29,10 +29,10 @@
 							<?php endif; ?>
 
 						</div><!-- .footer-widgets-wrapper -->
-						
+
 					</div><!-- .footer-widgets-outer-wrapper -->
 
-				<?php endif; 
+				<?php endif;
 
 				$has_footer_menu = has_nav_menu( 'footer-menu' );
 
@@ -41,7 +41,7 @@
 				if ( $has_footer_menu ) {
 					$footer_inner_classes .= ' has-footer-menu';
 				}
-				
+
 				?>
 
 				<div class="footer-inner section-inner<?php echo esc_attr( $footer_inner_classes ); ?>">
@@ -63,15 +63,14 @@
 
 					<div class="footer-credits">
 
-						<p class="footer-copyright">&copy; <?php echo esc_html( date_i18n( __( 'Y', 'chaplin' ) ) ); ?> <a href="<?php echo esc_url( home_url() ); ?>" rel="home"><?php echo bloginfo( 'name' ); ?></a></p>
+						<p class="footer-copyright">
+                            &copy; <?php echo esc_html( date_i18n( __( 'Y', 'chaplin' ) ) ); ?> <a href="<?php echo esc_url( home_url() ); ?>" rel="home"><?php echo bloginfo( 'name' ); ?>.</a>
+                            <a href="http://www.beian.miit.gov.cn" target="_blank" rel="nofollow"> 粤ICP备14048036号.</a>
+                        </p>
 
 						<p class="theme-credits color-secondary">
-                            <a href="http://www.beian.miit.gov.cn" target="_blank" rel="nofollow"> 粤ICP备14048036号.</a>
+                            <a href="#site-header"><?php _e('Top'); ?> &uparrow;</a>
 						</p><!-- .theme-credits -->
-
-                        <a class="alignright" href="#page">
-                            <?php _e('Top') ?> &uparrow;
-                        </a><!-- .to-the-top -->
 
 					</div><!-- .footer-credits -->
 
@@ -81,11 +80,11 @@
 
 			</footer><!-- #site-footer -->
 
-			<?php 
+			<?php
 		endif;
-		
-		wp_footer(); 
-		
+
+		wp_footer();
+
 		?>
 
     </body>

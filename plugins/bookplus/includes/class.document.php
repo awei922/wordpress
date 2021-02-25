@@ -145,7 +145,7 @@ class BookPlus_Document
                 'meta_value' => BookPlus::$meta_value,
                 'sort_column' => 'menu_order, post_date',
                 'show_date' => true,
-                'link_before' => '<i class="fa fa-folder-o" aria-hidden="true"></i> ',
+                'link_before' => '<i class="fa fa-book" aria-hidden="true"></i> ',
             ]
         );
 

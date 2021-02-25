@@ -1,7 +1,6 @@
 <?php
-/**
- * Parent style.css
- */
+
+// style.css
 function bookrss_enqueue_scripts()
 {
     wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
@@ -26,8 +25,7 @@ add_action('enqueue_block_editor_assets', 'bookrss_block_editor_styles');
 
 function bookrss_dequeue_scripts()
 {
-    wp_dequeue_style('twentytwenty-fonts');
-    wp_dequeue_style('twentytwenty-block-style');
+    wp_deregister_style('chaplin-google-fonts');
 }
 
 add_action('wp_enqueue_scripts', 'bookrss_dequeue_scripts', 99);
@@ -71,3 +69,12 @@ function bookrss_sidebar_registration()
 }
 
 add_action('widgets_init', 'bookrss_sidebar_registration');
+
+// function_exists
+function chaplin_excerpt_more()
+{
+}
+
+function chaplin_register_widgets()
+{
+}
