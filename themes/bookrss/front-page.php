@@ -1,97 +1,59 @@
-<?php
-/**
- * The main template file
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package WordPress
- * @subpackage Twenty_Twenty
- * @since Twenty Twenty 1.0
- */
+<?php get_header(); ?>
 
-get_header();
-?>
+<main id="site-content">
 
-    <main id="site-content" role="main">
+    <div class="container">
 
-        <div class="container">
+        <div class="row">
 
-            <div class="row">
+            <div class="col-mb-12 col-8">
 
-                <div class="col-mb-12 col-8">
+                <?php
 
-                    <?php
+                if (!get_the_content()) {
+                    global $wp_query;
+                    $wp_query->query(['posts_per_page' => 1]);
+                }
 
-                    if (!get_the_content()) {
-                        global $wp_query;
-                        $wp_query->query(['posts_per_page' => 1]);
-                    }
+                if ( have_posts() ) :
+                    while ( have_posts() ) :
 
-                    if ( have_posts() ) {
+                        the_post();
 
-                        $i = 0;
+                        get_template_part( 'content', get_post_type() );
 
-                        while ( have_posts() ) {
-                            $i++;
-                            if ( $i > 1 ) {
-                                echo '<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />';
-                            }
-                            the_post();
+                        // Display related posts
+                        get_template_part( 'parts/related-posts' );
 
-                            get_template_part( 'template-parts/content', get_post_type() );
+                    endwhile;
+                endif;
 
-                        }
-                    } elseif ( is_search() ) {
-                        ?>
+                ?>
 
-                        <div class="no-search-results-form section-inner thin">
+                <article <?php post_class( 'section-inner' ); ?> id="post-<?php the_ID(); ?>">
 
-                            <?php
-                            get_search_form(
-                                array(
-                                    'label' => __( 'search again', 'twentytwenty' ),
-                                )
-                            );
-                            ?>
+                    <div class="post-inner" id="post-inner">
 
-                        </div><!-- .no-search-results -->
+                        <div class="entry-content">
 
-                    <?php } ?>
+                            <?php if (function_exists('the_recent_posts')) {
+                                the_recent_posts();
+                            } ?>
 
-                    <hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />
+                        </div><!-- .entry-content -->
 
-                    <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+                    </div><!-- .post-inner -->
 
-                        <div class="post-inner <?php echo is_page_template( 'templates/template-full-width.php' ) ? '' : 'thin'; ?> ">
-
-                            <div class="entry-content">
-
-                                <?php if (function_exists('the_recent_posts')) {
-                                    the_recent_posts();
-                                } ?>
-
-                            </div><!-- .entry-content -->
-
-                        </div><!-- .post-inner -->
-
-                    </article><!-- .post -->
-
-                </div>
-
-                <?php get_sidebar(); ?>
+                </article><!-- .post -->
 
             </div>
 
+            <?php get_sidebar(); ?>
+
         </div>
 
-    </main><!-- #site-content -->
+    </div>
 
-<?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
+</main><!-- #site-content -->
 
-<?php
-get_footer();
+<?php get_footer(); ?>
