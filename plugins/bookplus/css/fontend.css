@@ -19,9 +19,25 @@
     font-size: smaller;
 }
 
+.list-document ul {
+    display: flex;
+    flex-direction: column;
+}
+
 .nav-document li a,
 .list-document li a {
+    color: inherit;
     font-size: large;
+}
+
+.list-document li {
+    display: flex;
+    border-bottom: 1px dotted #ccc;
+    margin-bottom: 0.5em !important;
+}
+
+.list-document li a {
+    flex: 1;
 }
 
 .nav-document li.page_item_has_children ul {

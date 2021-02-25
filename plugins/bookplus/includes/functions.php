@@ -5,65 +5,101 @@ if (!function_exists('the_breadcrumb')) {
     {
         global $post;
 
-        $html = '<span class="breadcrumb">';
-        $html .= '<a href="' . get_bloginfo('url') . '">' . __('Home');
-        $html .= '</a><span class="seprater"> &raquo; </span>';
+        ?>
 
-        if (!is_front_page()) {
-            if (is_category() || is_single()) {
-                $html .= get_the_category_list(', ');
-                if (is_single()) {
-                    $html .= '</a><span class="seprater"> &raquo; </span><span class="current">' . get_the_title() . '</span>';;
-                }
-            } elseif (is_page() && $post->post_parent) {
-                $home = get_page(get_option('page_on_front'));
-                for ($i = count($post->ancestors) - 1; $i >= 0; $i--) {
-                    if (($home->ID) != ($post->ancestors[$i])) {
-                        $html .= '<a href="' . get_permalink($post->ancestors[$i]) . '">' . get_the_title($post->ancestors[$i]) . '</a><span class="seprater"> &raquo; </span>';
+        <span class="breadcrumb">
+            <a href=" <?php bloginfo('url') ?> "><?php _e('Home'); ?></a>
+            <span class="seprater"> &raquo; </span>
+
+            <?php
+
+            if (!is_front_page()) {
+                if (is_category() || is_single()) {
+                    the_category(', ');
+
+                    if (is_single()) { ?>
+
+                        <span class="seprater"> &raquo; </span>
+                        <?php
+
+                        the_current(get_the_title());
                     }
-                }
-                $html .= '<span class="current">' . get_the_title() . '</span>';
-            } elseif (is_page()) {
-                $html .= '<span class="current">' . get_the_title() . '</span>';
-            } elseif (is_404()) {
-                $html .= '<span class="current">' . get_the_title() . '</span>';
-            } else {
-                $html .= '<span class="current">' . __('Post') . '</span>';
-            }
-        } else {
-            $html .= '<span class="current">' . __('Last Post') . '</span>';
-        }
-        $html .= '</span>';
+                } elseif (is_page() && $post->post_parent) {
+                    $home = get_page(get_option('page_on_front'));
+                    for ($i = count($post->ancestors) - 1; $i >= 0; $i--) {
+                        if (($home->ID) != ($post->ancestors[$i])) {
+                            ?>
 
-        echo $html;
+                            <a href="<?php the_permalink($post->ancestors[$i]) ?>">
+                                <?php the_the_title($post->ancestors[$i]) ?>
+                            </a>
+                            <span class="seprater"> &raquo; </span>
+
+                            <?php
+                        }
+                    }
+                    the_current(get_the_title());
+                } elseif (is_page()) {
+                    the_current(get_the_title());
+                } elseif (is_404()) {
+                    the_current(get_the_title());
+                } else {
+                    the_current(__('Post'));
+                }
+            } else {
+                the_current(__('Last Post'));
+            }
+            ?>
+        </span>
+
+        <?php
+
     }
+
+    function the_current($text)
+    {
+        ?>
+
+        <span class="current"><?php echo $text; ?></span>
+
+        <?php
+    }
+
 }
+
 
 if (!function_exists('the_recent_posts')) {
     function the_recent_posts()
     {
         ?>
+
         <div class="recent-posts">
             <h2><?php _e('Recent Posts'); ?></h2>
             <ul>
+
                 <?php
+
                 global $wp_query;
-                $wp_query->query(['posts_per_page' => 10]);
+                $wp_query->query(['posts_per_page' => 15]);
 
                 while (have_posts()) {
                     the_post();
                     ?>
+
                     <li>
                         <span class="post-date"><?php echo esc_html(get_the_date()); ?>&raquo;</span>
                         <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
                     </li>
+
                 <?php } ?>
+
                 <li>
                     <a class="more-link"
                        href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))) ?>"><?php _e('Read more...') ?></a>
                 </li>
             </ul>
         </div>
+
         <?php
     }
 }
