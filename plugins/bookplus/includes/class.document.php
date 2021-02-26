@@ -158,7 +158,7 @@ class BookPlus_Document
                 'meta_value' => BookPlus::$meta_value,
                 'sort_column' => 'menu_order, post_date',
                 'show_date' => true,
-                'link_before' => '<i class="fa fa-book"></i> ',
+                'link_before' => '<i class="fas fa-book"></i> ',
             ]
         );
 
@@ -200,7 +200,7 @@ class BookPlus_Document
                     'post_type' => BookPlus::$post_type,
                     'sort_column' => 'menu_order, post_date',
                     'show_date' => true,
-                    'link_before' => '<i class="fa fa-file-alt"></i> ',
+                    'link_before' => '<i class="far fa-file-alt"></i> ',
                 ]
             );
 

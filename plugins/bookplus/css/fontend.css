@@ -45,7 +45,7 @@
 }
 
 .nav-document li.page_item_has_children > a i::before {
-    content: "\f114";
+    content: "\f07b";
 }
 
 .nav-document li.current_page_parent > a,
