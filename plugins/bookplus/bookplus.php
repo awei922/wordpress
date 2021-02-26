@@ -56,7 +56,7 @@ class BookPlus
     public static function wp_enqueue_scripts()
     {
         wp_enqueue_style('bookplus-fontend', BookPlus::$plugin_url . 'css/fontend.css', [], filemtime(BookPlus::$plugin_path . 'css/fontend.css'));
-        wp_enqueue_style('bookplus-font-awesome', BookPlus::$plugin_url . 'css/font-awesome-4.7.0/css/font-awesome.min.css', [], filemtime(BookPlus::$plugin_path . 'css/font-awesome-4.7.0/css/font-awesome.min.css'));
+        wp_enqueue_style('bookplus-fontawesome', BookPlus::$plugin_url . 'css/fontawesome-all.min.css', [], filemtime(BookPlus::$plugin_path . 'css/fontawesome-all.min.css'));
     }
 
     public static function admin_enqueue_scripts()
