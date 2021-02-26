@@ -25,7 +25,7 @@ add_action('enqueue_block_editor_assets', 'bookrss_block_editor_styles');
 
 function bookrss_dequeue_scripts()
 {
-    wp_deregister_style('chaplin-google-fonts');
+//    wp_deregister_style('chaplin-google-fonts');
 }
 
 add_action('wp_enqueue_scripts', 'bookrss_dequeue_scripts', 99);
