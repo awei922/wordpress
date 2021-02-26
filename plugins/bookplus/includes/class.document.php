@@ -21,6 +21,8 @@ class BookPlus_Document
         }
         add_action('admin_menu', [__CLASS__, 'admin_menus']);
         add_action('admin_enqueue_scripts', [__CLASS__, 'enqueue_scripts']);
+
+        add_filter('quick_edit_dropdown_pages_args', [__CLASS__, 'quick_edit_dropdown_pages_args']);
     }
 
 
@@ -118,6 +120,17 @@ class BookPlus_Document
         return $args;
     }
 
+    public static function quick_edit_dropdown_pages_args($dropdown_args)
+    {
+        $dropdown_args = array_merge($dropdown_args,
+            ['meta_key' => BookPlus::$meta_key,
+                'meta_value' => BookPlus::$meta_value
+            ]
+        );
+
+        return $dropdown_args;
+    }
+
     public static function get_all_document_ids()
     {
         $posts = get_posts([
@@ -158,32 +171,39 @@ class BookPlus_Document
 
     public static function nav_document($atts = [], $content = '')
     {
-        global $post;
-
         if (isset($atts['post_id']) && $atts['post_id'] > 0) {
             $parent_id = intval($atts['post_id']);
-        } else if ($post->post_parent) {
-            $ancestors = get_post_ancestors($post->ID);
-            $root = count($ancestors) - 1;
-            $parent_id = $ancestors[$root];
         } else {
-            $parent_id = $post->ID;
+            $parent_id = $post_id = intval(get_query_var('p'));
+            $ancestors = get_post_ancestors($post_id);
+
+            if (!empty($ancestors)) {
+                $root = count($ancestors) - 1;
+                $parent_id = $ancestors[$root];
+            }
         }
 
-        $parent_post = get_post($parent_id);
-        $list = wp_list_pages(
+        $posts = get_posts(
             [
-                'echo' => 0,
-                'child_of' => $parent_post->ID,
-                'title_li' => '',
-                'post_type' => BookPlus::$post_type,
-                'sort_column' => 'menu_order, post_date',
-                'show_date' => true,
-                'link_before' => '<i class="fa fa-file-text-o" aria-hidden="true"></i> ',
+                'post_parent' => $parent_id,
+                'post_type' => BookPlus::$post_type
             ]
         );
 
-        if (!empty($list)) {
+        if (!empty($posts)) {
+            $parent_post = get_post($parent_id);
+            $list = wp_list_pages(
+                [
+                    'echo' => 0,
+                    'child_of' => $parent_id,
+                    'title_li' => '',
+                    'post_type' => BookPlus::$post_type,
+                    'sort_column' => 'menu_order, post_date',
+                    'show_date' => true,
+                    'link_before' => '<i class="fa fa-file-text-o" aria-hidden="true"></i> ',
+                ]
+            );
+
             $content .= '<div class="nav-document"><h3>' . __('Documentation') . '：<a href="' . get_permalink($parent_post) . '">' . $parent_post->post_title . '</a></h3><ul>' . $list . '</ul></div>';
         }
 

@@ -3,7 +3,8 @@
 if (!function_exists('the_breadcrumb')) {
     function the_breadcrumb()
     {
-        global $post;
+        $post = get_post(get_query_var('p'));
+        setup_postdata($post);
 
         ?>
 
@@ -54,6 +55,7 @@ if (!function_exists('the_breadcrumb')) {
 
         <?php
 
+        wp_reset_postdata();
     }
 
     function the_current($text)
@@ -91,7 +93,12 @@ if (!function_exists('the_recent_posts')) {
                         <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
                     </li>
 
-                <?php } ?>
+                    <?php
+
+                }
+                wp_reset_postdata();
+
+                ?>
 
                 <li>
                     <a class="more-link"

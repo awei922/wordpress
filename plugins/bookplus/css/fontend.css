@@ -41,7 +41,11 @@
 }
 
 .nav-document li.page_item_has_children ul {
-    margin-left: 1em !important;
+    margin-left: 2em !important;
+}
+
+.nav-document li.page_item_has_children > a i::before {
+    content: "\f114";
 }
 
 .nav-document li.current_page_parent > a,

@@ -17,7 +17,7 @@ class BookPlus_FrontEnd
 
     public static function post_content($content = '')
     {
-        global $post;
+
 
         // archive
         if ((is_archive() || is_home()) && BookPlus_Settings::get_option('archive_display_excerpt')) {
@@ -30,6 +30,7 @@ class BookPlus_FrontEnd
             return wp_trim_words($content, 55, ' &hellip; ' . $link);
         }
 
+        $post = get_post(get_query_var('p'));
         //if post password
         if (post_password_required($post) && BookPlus_Settings::get_option('split_protected_posts')) {
             $content = explode('<!--more-->', $post->post_content)[0] . $content;
