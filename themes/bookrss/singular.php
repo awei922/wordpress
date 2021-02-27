@@ -9,17 +9,11 @@
             <?php
 
             $active_sidebar = is_active_sidebar('sidebar-0');
-
-            if (is_page_template('template-cover.php') ||
-                is_page_template('template-full-width.php') ||
-                is_page_template('template-full-width-cover.php')) {
-
-                $active_sidebar = false;
-            }
+            $is_cover_template = chaplin_is_cover_template();
 
             ?>
 
-            <div class="col-mb-12 <?php if ($active_sidebar) { ?> col-8 <?php } ?>">
+            <div class="col-mb-12 <?php if ($active_sidebar && !$is_cover_template) { ?> col-8 <?php } ?>">
 
                 <?php
 
@@ -41,6 +35,34 @@
             </div>
 
             <?php
+
+            if (is_front_page()) {
+
+                ?>
+
+                <div class="col-mb-12 <?php if ($active_sidebar) { ?> col-8 <?php } ?>">
+
+                    <article <?php post_class('section-inner'); ?>>
+
+                        <div class="post-inner" id="post-inner">
+
+                            <div class="entry-content">
+
+                                <?php if (function_exists('the_recent_posts')) {
+                                    the_recent_posts();
+                                } ?>
+
+                            </div><!-- .entry-content -->
+
+                        </div><!-- .post-inner -->
+
+                    </article><!-- .post -->
+
+                </div>
+
+                <?php
+
+            }
 
             if ($active_sidebar) {
                 get_sidebar();

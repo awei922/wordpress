@@ -5,11 +5,10 @@ if (!function_exists('the_breadcrumb')) {
     {
         $post = get_post(get_query_var('p'));
         setup_postdata($post);
-
         ?>
 
         <span class="breadcrumb">
-            <a href=" <?php bloginfo('url') ?> "><?php _e('Home'); ?></a>
+            <a href="<?php bloginfo('url') ?>"><?php _e('Home'); ?></a>
             <span class="seprater"> &raquo; </span>
 
             <?php
@@ -21,6 +20,7 @@ if (!function_exists('the_breadcrumb')) {
                     if (is_single()) { ?>
 
                         <span class="seprater"> &raquo; </span>
+
                         <?php
 
                         the_current(get_the_title());
@@ -51,6 +51,7 @@ if (!function_exists('the_breadcrumb')) {
                 the_current(__('Last Post'));
             }
             ?>
+
         </span>
 
         <?php
@@ -82,7 +83,7 @@ if (!function_exists('the_recent_posts')) {
                 <?php
 
                 global $wp_query;
-                $wp_query->query(['posts_per_page' => 15]);
+                $wp_query->query(['posts_per_page' => 20]);
 
                 while (have_posts()) {
                     the_post();
@@ -90,14 +91,24 @@ if (!function_exists('the_recent_posts')) {
 
                     <li>
                         <span class="post-date"><?php echo esc_html(get_the_date()); ?>&raquo;</span>
-                        <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                        <a href="<?php the_permalink() ?>">
+
+                            <?php if (is_sticky()) { ?>
+
+                                <i class="fa fa-thumbtack"></i>
+
+                                <?php
+                            }
+                            the_title();
+                            ?>
+
+                        </a>
                     </li>
 
                     <?php
 
                 }
                 wp_reset_postdata();
-
                 ?>
 
                 <li>
