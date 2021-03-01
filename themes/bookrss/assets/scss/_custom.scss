@@ -81,7 +81,7 @@ a {
         max-width: $max_width;
         width: calc(100% - 10rem);
 
-        .section-inner {
+        .section-inner:not(.fade-block) {
             width: 100%;
         }
     }

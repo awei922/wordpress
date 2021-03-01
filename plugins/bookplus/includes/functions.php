@@ -95,7 +95,7 @@ if (!function_exists('the_recent_posts')) {
 
                             <?php if (is_sticky()) { ?>
 
-                                <i class="fa fa-thumbtack"></i>
+                                <i class="far fa-bookmark"></i>
 
                                 <?php
                             }
